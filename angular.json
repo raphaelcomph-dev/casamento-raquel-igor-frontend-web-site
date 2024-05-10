@@ -87,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "casamento-raquel-igor-frontend-web-site:build:production"
+              "buildTarget": "casamento-raquel-igor-frontend-web-site:build:production"
             },
             "development": {
-              "browserTarget": "casamento-raquel-igor-frontend-web-site:build:development"
+              "buildTarget": "casamento-raquel-igor-frontend-web-site:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "casamento-raquel-igor-frontend-web-site:build"
+            "buildTarget": "casamento-raquel-igor-frontend-web-site:build"
           }
         },
         "test": {
