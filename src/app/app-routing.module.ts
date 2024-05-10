@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AppUrls } from "./app.urls";
+import { MainPage } from "./views/pages/main/main.page";
 
-const routes: Routes = [];
+const routes: Routes = [{ path: AppUrls.PATHS.ROOT.RELATIVE_PATH(), component: MainPage }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
