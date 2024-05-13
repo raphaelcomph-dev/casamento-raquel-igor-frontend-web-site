@@ -3,6 +3,7 @@
 @import "bootstrap/scss/functions";
 
 @import "./assets/scss/fonts";
+@import "./assets/scss/background";
 
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
@@ -16,4 +17,9 @@ $bootstrap-icons-font-src: url("~bootstrap-icons/font/fonts/bootstrap-icons.woff
 
 @import "./assets/scss/habibi-theme/style.scss";
 
+@import "./assets/scss/background";
+
 @import "ngx-toastr/toastr";
+
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
