@@ -619,14 +619,14 @@
             &:nth-child(even) .grid {
                 @media (min-width: 991px) {
                     transform: translateY(0);
-                    animation: margin 10s linear infinite;
+                    animation: margin 15s linear infinite;
                 }
             }
 
             &:nth-child(odd) .grid {
                 @media (min-width: 991px) {
                     transform: translateY(0);
-                    animation: marginOdd 10s linear infinite;
+                    animation: marginOdd 15s linear infinite;
                 }
             }
 

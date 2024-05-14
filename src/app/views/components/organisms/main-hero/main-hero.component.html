@@ -167,38 +167,36 @@
                 <img class="zoom" src="assets/images/hero/hero-1.jpeg" alt="" />
             </div>
         </div>
-        <div class="wpo-wedding-date">
-            <div class="clock-grids">
-                <div id="clock" class="">
-                    <div class="box">
-                        <div>
-                            <div class="time">4</div>
-                            <span>Meses</span>
-                        </div>
+        <div class="wpo-wedding-date p-0">
+            <div id="clock" class="row justify-content-between align-items-center g-2 text-white w-100 py-3 px-lg-3">
+                <div class="col">
+                    <div>
+                        <div class="time">{{ duration.get("months") }}</div>
+                        <span>Meses</span>
                     </div>
-                    <div class="box">
-                        <div>
-                            <div class="time">20</div>
-                            <span>Dias</span>
-                        </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <div class="time">{{ duration.get("days") }}</div>
+                        <span>Dias</span>
                     </div>
-                    <div class="box">
-                        <div>
-                            <div class="time">02</div>
-                            <span>Horas</span>
-                        </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <div class="time">{{ duration.get("hours") }}</div>
+                        <span>Horas</span>
                     </div>
-                    <div class="box">
-                        <div>
-                            <div class="time">15</div>
-                            <span>Min</span>
-                        </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <div class="time">{{ duration.get("minutes") }}</div>
+                        <span>Min</span>
                     </div>
-                    <div class="box">
-                        <div>
-                            <div class="time">14</div>
-                            <span>Seg</span>
-                        </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <div class="time">{{ duration.get("seconds") }}</div>
+                        <span>Seg</span>
                     </div>
                 </div>
             </div>

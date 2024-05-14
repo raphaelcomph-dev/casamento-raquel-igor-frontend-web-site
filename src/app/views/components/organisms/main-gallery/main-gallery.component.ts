@@ -1,4 +1,5 @@
-import { Component, ElementRef, Renderer2 } from "@angular/core";
+import { Component, ElementRef, Renderer2, ViewChild } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { OwlOptions } from "ngx-owl-carousel-o";
 
 @Component({
@@ -7,17 +8,7 @@ import { OwlOptions } from "ngx-owl-carousel-o";
     styles: ``,
 })
 export class MainGalleryComponent {
-    constructor(private el: ElementRef, private renderer: Renderer2) {}
-
-    ngOnInit(): void {
-        setTimeout(() => {
-            const owlCarousel = this.el.nativeElement.querySelectorAll(".owl-carousel");
-            owlCarousel.forEach((element) => {
-                this.renderer.addClass(element, "portfolio-grids");
-            });
-        }, 500);
-    }
-
+    @ViewChild("content") content: any;
     customOptions: OwlOptions = {
         loop: true,
         mouseDrag: true,
@@ -26,6 +17,7 @@ export class MainGalleryComponent {
         dots: false,
         autoplay: true,
         autoplayTimeout: 4000,
+        autoplaySpeed: 1000,
         navSpeed: 2000,
         navText: ["", ""],
         responsive: {
@@ -44,4 +36,39 @@ export class MainGalleryComponent {
         },
         nav: false,
     };
+    zoomPhotoAssetUrl;
+
+    photoList = [
+        "assets/images/gallery/gallery-1.jpeg",
+        "assets/images/gallery/gallery-2.jpeg",
+        "assets/images/gallery/gallery-13.jpeg",
+        "assets/images/gallery/gallery-5.jpeg",
+        "assets/images/gallery/gallery-4.jpeg",
+        "assets/images/gallery/gallery-6.jpeg",
+        "assets/images/gallery/gallery-7.jpeg",
+        "assets/images/gallery/gallery-8.jpeg",
+        "assets/images/gallery/gallery-11.jpeg",
+        "assets/images/gallery/gallery-10.jpeg",
+        "assets/images/gallery/gallery-12.jpeg",
+        "assets/images/gallery/gallery-3.jpeg",
+        "assets/images/gallery/gallery-9.jpeg",
+        "assets/images/gallery/gallery-14.jpeg",
+        "assets/images/gallery/gallery-15.jpeg",
+    ];
+
+    constructor(private el: ElementRef, private renderer: Renderer2, private modalService: NgbModal) {}
+
+    ngOnInit(): void {
+        setTimeout(() => {
+            const owlCarousel = this.el.nativeElement.querySelectorAll(".owl-carousel");
+            owlCarousel.forEach((element) => {
+                this.renderer.addClass(element, "portfolio-grids");
+            });
+        }, 500);
+    }
+
+    onZoomPhoto(photoAssetUrl: string): void {
+        this.zoomPhotoAssetUrl = photoAssetUrl;
+        this.modalService.open(this.content, { centered: true });
+    }
 }

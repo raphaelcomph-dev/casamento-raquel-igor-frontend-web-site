@@ -482,7 +482,7 @@
             > div {
                 float: left;
                 display: table;
-                width: 80px;
+                width: 40px;
 
                 @include media-query(450px) {
                     width: 60px;
