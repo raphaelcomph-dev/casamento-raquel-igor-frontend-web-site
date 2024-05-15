@@ -1,0 +1,21 @@
+@import "habibi-theme/helpers/variables";
+
+a {
+    color: $theme-primary-color;
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    text-transform: capitalize;
+
+    &.underscore {
+        &::before {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            content: "";
+            background: $theme-primary-color;
+        }
+    }
+}

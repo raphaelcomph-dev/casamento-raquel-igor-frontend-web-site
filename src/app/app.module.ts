@@ -22,6 +22,7 @@ import { MainPage } from "./views/pages/main/main.page";
 import { MainAboutUsComponent } from "./views/components/organisms/main-about-us/main-about-us.component";
 import { MainOurHistoryComponent } from "./views/components/organisms/main-our-history/main-our-history.component";
 import { MainGalleryComponent } from "./views/components/organisms/main-gallery/main-gallery.component";
+import { MainLocationComponent } from './views/components/organisms/main-location/main-location.component';
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -37,6 +38,7 @@ registerLocaleData(localePt);
         MainPage,
         MainOurHistoryComponent,
         MainGalleryComponent,
+        MainLocationComponent,
     ],
     imports: [
         BrowserAnimationsModule,
