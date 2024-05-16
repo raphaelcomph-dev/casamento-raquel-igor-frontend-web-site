@@ -8,6 +8,7 @@ import { Component, ElementRef, HostListener, OnInit, Renderer2 } from "@angular
 export class MainHeaderComponent implements OnInit {
     currentSection: string;
     isSticky = false;
+    isBellowHeader = false;
 
     constructor(private el: ElementRef, private renderer: Renderer2) {}
 
@@ -15,7 +16,8 @@ export class MainHeaderComponent implements OnInit {
 
     @HostListener("window:scroll", [])
     onWindowScroll() {
-        this.isSticky = window.pageYOffset > 90;
+        this.isBellowHeader = window.pageYOffset > 90;
+        this.isSticky = window.pageYOffset > 180;
     }
 
     showMenu(force?: boolean): void {

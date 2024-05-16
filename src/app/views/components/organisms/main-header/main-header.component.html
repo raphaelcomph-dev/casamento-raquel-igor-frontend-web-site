@@ -1,8 +1,8 @@
-<header id="header">
+<header id="header" [ngStyle]="{ 'padding-top': isBellowHeader ? '90px' : '0px' }">
     <div class="wpo-site-header wpo-header-style-3">
         <nav
             class="navigation navbar navbar-expand-lg navbar-light"
-            [ngClass]="{ 'sticky-header': isSticky, 'sticky-on': isSticky }"
+            [ngClass]="{ 'sticky-on': isSticky, 'sticky-header': isBellowHeader }"
         >
             <div class="container-fluid">
                 <div class="row align-items-center">
