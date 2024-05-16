@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2 } from "@angular/core";
+import { Component, ElementRef, HostListener, OnInit, Renderer2 } from "@angular/core";
 
 @Component({
     selector: "app-main-header",
@@ -7,10 +7,16 @@ import { Component, ElementRef, OnInit, Renderer2 } from "@angular/core";
 })
 export class MainHeaderComponent implements OnInit {
     currentSection: string;
+    isSticky = false;
 
     constructor(private el: ElementRef, private renderer: Renderer2) {}
 
     ngOnInit(): void {}
+
+    @HostListener("window:scroll", [])
+    onWindowScroll() {
+        this.isSticky = window.pageYOffset > 90;
+    }
 
     showMenu(force?: boolean): void {
         const navbar = document.getElementById("navbar");
@@ -35,7 +41,7 @@ export class MainHeaderComponent implements OnInit {
         }
     }
 
-    private scrollTo(elementId?: string, offsetY: number = 0): void {
+    private scrollTo(elementId?: string, offsetY: number = 85): void {
         setTimeout(() => {
             if (elementId) {
                 const element = document.getElementById(elementId);

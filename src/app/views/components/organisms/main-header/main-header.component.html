@@ -1,6 +1,9 @@
 <header id="header">
     <div class="wpo-site-header wpo-header-style-3">
-        <nav class="navigation navbar navbar-expand-lg navbar-light">
+        <nav
+            class="navigation navbar navbar-expand-lg navbar-light"
+            [ngClass]="{ 'sticky-header': isSticky, 'sticky-on': isSticky }"
+        >
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-3 d-lg-none dl-block">
@@ -18,25 +21,37 @@
                             <a class="navbar-brand">Raquel & Igor</a>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-1 col-1">
+                    <div class="col">
                         <div id="navbar" class="collapse navbar-collapse navigation-holder">
                             <button class="menu-close" (click)="showMenu()">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
                             <ul class="nav navbar-nav mb-2 mb-lg-0">
-                                <li class="menu-item-has-children">
-                                    <a class="active" href="#">Início</a>
+                                <li class="">
+                                    <a
+                                        role="button"
+                                        (click)="scrollToSection('couple')"
+                                        [ngClass]="{ active: currentSection === 'couple' }"
+                                        >Sobre nós</a
+                                    >
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a role="button" (click)="scrollToSection('couple')">Sobre nós</a>
+                                <li class="">
+                                    <a
+                                        role="button"
+                                        (click)="scrollToSection('story')"
+                                        [ngClass]="{ active: currentSection === 'story' }"
+                                        >Nossa história</a
+                                    >
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a role="button" (click)="scrollToSection('story')">Nossa história</a>
+                                <li class="">
+                                    <a
+                                        role="button"
+                                        (click)="scrollToSection('location')"
+                                        [ngClass]="{ active: currentSection === 'location' }"
+                                        >Local</a
+                                    >
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="shop.html">Local</a>
-                                </li>
-                                <li class="menu-item-has-children">
+                                <li class="">
                                     <a href="shop.html">Confirmar presença</a>
                                 </li>
                                 <li><a href="contact.html">Lista de presentes</a></li>

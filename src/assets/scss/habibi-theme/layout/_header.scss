@@ -191,11 +191,11 @@
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: all 1s;
-    -moz-transition: all 1s;
-    -o-transition: all 1s;
-    -ms-transition: all 1s;
-    transition: all 1s;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
     -webkit-box-shadow: 0 -5px 15px #086ad84a;
     box-shadow: 0 -5px 15px #086ad84a;
 }
