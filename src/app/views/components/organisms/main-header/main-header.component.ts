@@ -1,16 +1,19 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2 } from "@angular/core";
+import { BaseView } from "../../../base.view";
 
 @Component({
     selector: "app-main-header",
     templateUrl: "./main-header.component.html",
     styleUrls: ["./main-header.component.scss"],
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent extends BaseView implements OnInit {
     currentSection: string;
     isSticky = false;
     isBellowHeader = false;
 
-    constructor(private el: ElementRef, private renderer: Renderer2) {}
+    constructor(private el: ElementRef, private renderer: Renderer2) {
+        super();
+    }
 
     ngOnInit(): void {}
 

@@ -1,13 +1,37 @@
 // wpo-page-title
 
 .wpo-page-title {
-    // background: url(../images/page-title.jpg) no-repeat center top / cover;
-    min-height: 360px;
+    // background: url("https://placehold.co/1920x360") no-repeat center top / cover;
+    background: url("/assets/images/gift-hero.jpeg") no-repeat center -93px / cover;
+    min-height: 520px;
     position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     z-index: 1;
+
+    .preview-panel-wrap {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 0vh;
+        width: 100%;
+        z-index: 99;
+    }
+    .preview-panel {
+        width: 100%;
+        /* max-width: 600px; */
+        height: 520px;
+        // height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        /* border: 1px solid rgba(0, 0, 0, 0.3); */
+        @media (max-width: 767px) {
+            height: 250px;
+        }
+    }
 
     @media (max-width: 767px) {
         min-height: 250px;

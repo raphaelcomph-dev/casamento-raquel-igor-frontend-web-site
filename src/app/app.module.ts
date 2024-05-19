@@ -31,6 +31,7 @@ import "./extensions/string.extension";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectSingleChoiceComponent } from "./views/components/atoms/select-single-choice/select-single-choice.component";
+import { GiftListPage } from "./views/pages/gifts/gift-list/gift-list.page";
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -51,6 +52,7 @@ registerLocaleData(localePt);
         MainRsvpComponent,
         InputTextComponent,
         SelectSingleChoiceComponent,
+        GiftListPage,
     ],
     imports: [
         BrowserAnimationsModule,
