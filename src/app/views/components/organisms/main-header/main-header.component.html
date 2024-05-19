@@ -53,7 +53,12 @@
                                     >
                                 </li>
                                 <li class="">
-                                    <a href="shop.html">Confirmar presença</a>
+                                    <a
+                                        role="button"
+                                        (click)="scrollToSection('rsvp')"
+                                        [ngClass]="{ active: currentSection === 'rsvp' }"
+                                        >Confirmar presença</a
+                                    >
                                 </li>
                                 <li><a href="contact.html">Lista de presentes</a></li>
                             </ul>

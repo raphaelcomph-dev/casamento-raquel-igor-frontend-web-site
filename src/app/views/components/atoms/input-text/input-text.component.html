@@ -1,0 +1,36 @@
+<div class="form-group">
+    <label [for]="inputId" class="form-label" *ngIf="label">
+        {{ label }}
+        <i
+            class="fa-solid fa-circle-info"
+            role="button"
+            *ngIf="showInfoPopover"
+            [ngbPopover]="popContent"
+            [openDelay]="300"
+            triggers="mouseenter:mouseleave"
+        ></i>
+        <ng-template #popContent>
+            <ng-content></ng-content>
+        </ng-template>
+    </label>
+    <input
+        #inputField
+        class="form-control"
+        autocomplete="off"
+        [type]="type"
+        [name]="inputId"
+        [id]="inputId"
+        [placeholder]="placeholder"
+        [mask]="mask"
+        [dropSpecialCharacters]="false"
+        [readOnly]="readOnly"
+        [ngClass]="{ 'is-invalid': !valid && isValidated, readonly: readOnly }"
+        (keyup)="onChange()"
+        (input)="onInputChange($event)"
+        [(ngModel)]="value"
+    />
+    <div class="invalid-feedback" *ngIf="!valid && isValidated">
+        <div>{{ errorMessage }}</div>
+    </div>
+    <div class="form-text" *ngIf="helperText">{{ helperText }}</div>
+</div>

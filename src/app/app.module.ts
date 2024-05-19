@@ -22,8 +22,15 @@ import { MainPage } from "./views/pages/main/main.page";
 import { MainAboutUsComponent } from "./views/components/organisms/main-about-us/main-about-us.component";
 import { MainOurHistoryComponent } from "./views/components/organisms/main-our-history/main-our-history.component";
 import { MainGalleryComponent } from "./views/components/organisms/main-gallery/main-gallery.component";
-import { MainLocationComponent } from './views/components/organisms/main-location/main-location.component';
-import { FooterComponent } from './views/components/organisms/footer/footer.component';
+import { MainLocationComponent } from "./views/components/organisms/main-location/main-location.component";
+import { FooterComponent } from "./views/components/organisms/footer/footer.component";
+import { MainRsvpComponent } from "./views/components/organisms/main-rsvp/main-rsvp.component";
+import { InputTextComponent } from "./views/components/atoms/input-text/input-text.component";
+
+import "./extensions/string.extension";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SelectSingleChoiceComponent } from "./views/components/atoms/select-single-choice/select-single-choice.component";
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -41,10 +48,16 @@ registerLocaleData(localePt);
         MainGalleryComponent,
         MainLocationComponent,
         FooterComponent,
+        MainRsvpComponent,
+        InputTextComponent,
+        SelectSingleChoiceComponent,
     ],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
         CarouselModule,
         AppRoutingModule,
         NgbModule,
