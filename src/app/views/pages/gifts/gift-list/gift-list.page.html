@@ -24,7 +24,7 @@
                 <div class="wpo-product-section">
                     <div class="sorting-section">
                         <ul>
-                            <li>Exibindo 1–10 de 80 itens</li>
+                            <li>Exibindo 1—10 de 80 itens</li>
                             <li>
                                 <select name="sorting" id="sorting" class="select">
                                     <option value="menu_order" selected="selected">Ordernação padrão</option>
@@ -46,7 +46,11 @@
                                         </ul>
                                     </div>
                                     <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Terno do noivo</a></h3>
+                                        <h3>
+                                            <a [routerLink]="URLS.PATHS.GIFTS.DETAILS.ABSOLUTE_PATH()"
+                                                >Terno do noivo</a
+                                            >
+                                        </h3>
                                         <ul>
                                             <li>R$ 800,00</li>
                                         </ul>

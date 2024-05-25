@@ -13,6 +13,10 @@ export class AppUrls {
                 ABSOLUTE_PATH: () => `${AppUrls.PATHS.GIFTS.ABSOLUTE_PATH()}/lista`,
                 RELATIVE_PATH: () => `${AppUrls.PATHS.GIFTS.RELATIVE_PATH()}/lista`,
             },
+            DETAILS: {
+                ABSOLUTE_PATH: () => `${AppUrls.PATHS.GIFTS.ABSOLUTE_PATH()}/detalhes`,
+                RELATIVE_PATH: () => `${AppUrls.PATHS.GIFTS.RELATIVE_PATH()}/detalhes`,
+            },
         },
     };
 
