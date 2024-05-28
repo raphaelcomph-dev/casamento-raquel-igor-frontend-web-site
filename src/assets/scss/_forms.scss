@@ -1,0 +1,31 @@
+.readonly {
+    background: #e9ecef !important;
+    color: #607080;
+    pointer-events: none;
+    touch-action: none;
+}
+
+.btn-outline-primary {
+    color: $theme-primary-color;
+    border-color: $theme-primary-color;
+    &:hover {
+        background: $theme-primary-color;
+        // color: $white !important;
+        border-color: $theme-primary-color;
+    }
+}
+.btn-check:checked + .btn {
+    color: $white !important;
+    &:hover {
+        color: $theme-primary-color;
+    }
+}
+
+textarea {
+    width: 100%;
+    border-color: #d9d9d9 !important;
+    &::placeholder {
+        font-size: 16px !important;
+        color: #bdbec2 !important;
+    }
+}

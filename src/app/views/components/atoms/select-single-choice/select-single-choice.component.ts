@@ -20,6 +20,7 @@ export class SelectSingleChoiceComponent extends BaseInputComponent implements O
     @Input() required: boolean = false;
     @Input() readOnly: boolean = false;
     @Input() displayInline: boolean = false;
+    @Input() fieldName: string;
     protected selectedValue: string = "";
     protected isValidated: boolean = false;
     protected valid: boolean = true;
@@ -28,6 +29,7 @@ export class SelectSingleChoiceComponent extends BaseInputComponent implements O
     ngOnInit(): void {
         this.setInputId(this.label);
         this.selectedValue = this.initialSelectedValue ?? "";
+        this.fieldName = this.fieldName || this.label || this.placeholder;
     }
 
     getSelectedValue(): string {
@@ -43,7 +45,7 @@ export class SelectSingleChoiceComponent extends BaseInputComponent implements O
         this.valid = true;
         if (this.required && !this.getSelectedValue()) {
             this.valid = false;
-            this.errorMessage = this.ERROR_MESSAGES.SELECT_FIELD_REQUIRED(this.label);
+            this.errorMessage = this.ERROR_MESSAGES.SELECT_FIELD_REQUIRED(this.fieldName);
             console.info(`Componente ${this.label} está inválido por motivos de obrigatoriedade`);
         }
         return this.valid;
@@ -51,5 +53,11 @@ export class SelectSingleChoiceComponent extends BaseInputComponent implements O
 
     isValid(): boolean {
         return this.valid;
+    }
+
+    protected onChange(event: any): void {
+        if (this.isValidated) {
+            this.validate();
+        }
     }
 }

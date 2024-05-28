@@ -31,7 +31,7 @@ export class InputTextComponent extends BaseInputComponent implements OnInit {
     ngOnInit(): void {
         this.setInputId(this.label);
         this.value = this.initialValue;
-        this.fieldName = this.fieldName || this.label;
+        this.fieldName = this.fieldName || this.label || this.placeholder;
     }
 
     getValue(): string {

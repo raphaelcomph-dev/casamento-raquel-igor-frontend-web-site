@@ -1,0 +1,17 @@
+<div class="form-group">
+    <label [for]="inputId" class="form-label" *ngIf="label">{{ label }}</label>
+    <textarea
+        style="display: block; overflow-wrap: break-word"
+        [name]="inputId"
+        [id]="inputId"
+        [rows]="rows"
+        [placeholder]="placeholder"
+        [readOnly]="readOnly"
+        [ngClass]="{ 'is-invalid': !valid && isValidated, readonly: readOnly }"
+        [(ngModel)]="value"
+        (input)="onChange($event)"
+    ></textarea>
+    <div class="invalid-feedback" *ngIf="!valid && isValidated">
+        <div>{{ errorMessage }}</div>
+    </div>
+</div>

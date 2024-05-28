@@ -8,54 +8,42 @@
                             <div class="wpo-section-title">
                                 <h2>Confirmar presença</h2>
                             </div>
-                            <form method="post" class="contact-validation-active" id="contact-form-main">
-                                <div class="mb-3">
+                            <form class="contact-validation-active" id="contact-form-main" (ngSubmit)="onSubmitRsvp()">
+                                <div class="mb-4">
                                     <app-input-text
+                                        #inputName
                                         placeholder="Nome ou nome da família"
                                         helperText="Conforme escrito no convite"
+                                        [required]="true"
+                                        [readOnly]="!isFormInEditableState(rsvpForm.state)"
                                     ></app-input-text>
                                 </div>
-                                <div class="radio-buttons">
-                                    <p>
-                                        <input
-                                            type="radio"
-                                            id="attend"
-                                            name="radio-group"
-                                            [checked]="rsvpAnswer === true"
-                                            (click)="onToggleRsvpAnswer(true)"
-                                        />
-                                        <label for="attend">Sim, eu estarei lá!</label>
-                                    </p>
-                                    <p>
-                                        <input
-                                            type="radio"
-                                            id="not"
-                                            name="radio-group"
-                                            [checked]="rsvpAnswer === false"
-                                            (click)="onToggleRsvpAnswer(false)"
-                                        />
-                                        <label for="not">Desculpe, não poderei comparecer</label>
-                                    </p>
+                                <div class="mb-4">
+                                    <app-input-radiogroup
+                                        #radioRsvpAnswer
+                                        [options]="rsvpAnswerInputOptions"
+                                        (optionChanged)="onToggleRsvpAnswer()"
+                                        [required]="true"
+                                        [readOnly]="!isFormInEditableState(rsvpForm.state)"
+                                    ></app-input-radiogroup>
                                 </div>
-                                <div *ngIf="rsvpAnswer === false">
-                                    <div>
-                                        <textarea
-                                            name=""
-                                            id=""
-                                            cols="30"
-                                            rows="6"
-                                            placeholder="Deixe uma mensagem para os noivos... e não esqueça de assinar com seu nome completo no final "
-                                            class=""
-                                            style=""
-                                        ></textarea>
-                                    </div>
+                                <div *ngIf="rsvpForm.fields.answer === false">
+                                    <app-input-text-area
+                                        #textAreaMessage
+                                        placeholder="Deixe uma mensagem para os noivos... e não esqueça de assinar com seu nome completo no final "
+                                        [rows]="6"
+                                        [readOnly]="!isFormInEditableState(rsvpForm.state)"
+                                    ></app-input-text-area>
                                 </div>
-                                <div *ngIf="rsvpAnswer === true">
+                                <div *ngIf="rsvpForm.fields.answer === true">
                                     <div class="mb-4">
                                         <app-select-single-choice
-                                            [options]="rsvpQtyGuestSelectOptions"
-                                            placeholder="Quantas pessoas irão com você"
+                                            #selectGuestQty
+                                            placeholder="Quantas pessoas irão com você?"
                                             helperText="Por convite encaminhado"
+                                            [options]="rsvpQtyGuestSelectOptions"
+                                            [required]="true"
+                                            [readOnly]="!isFormInEditableState(rsvpForm.state)"
                                         >
                                         </app-select-single-choice>
                                     </div>

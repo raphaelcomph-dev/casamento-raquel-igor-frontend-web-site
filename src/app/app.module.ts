@@ -33,6 +33,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectSingleChoiceComponent } from "./views/components/atoms/select-single-choice/select-single-choice.component";
 import { GiftListPage } from "./views/pages/gifts/gift-list/gift-list.page";
 import { GiftDetailsPage } from "./views/pages/gifts/gift-details/gift-details.page";
+import { InputRadiogroupComponent } from "./views/components/atoms/input-radiogroup/input-radiogroup.component";
+import { InputTextAreaComponent } from "./views/components/atoms/input-text-area/input-text-area.component";
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -52,6 +54,8 @@ registerLocaleData(localePt);
         FooterComponent,
         MainRsvpComponent,
         InputTextComponent,
+        InputRadiogroupComponent,
+        InputTextAreaComponent,
         SelectSingleChoiceComponent,
         GiftListPage,
         GiftDetailsPage,

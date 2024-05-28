@@ -21,4 +21,13 @@ export class AppUrls {
     };
 
     public static readonly EXTERNAL_URLS = {};
+
+    public static readonly API_ENDPOINTS = {
+        GIFTS: {
+            FIND_ALL: () => `http://localhost:3000/gifts`,
+        },
+        RSVP: {
+            POST_ANSWER: () => `http://localhost:3000/rsvp`,
+        },
+    };
 }

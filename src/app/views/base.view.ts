@@ -2,9 +2,11 @@ import * as dayjs from "dayjs";
 import { v1 as uuidv1 } from "uuid";
 import { environment } from "../../environments/environment";
 import { AppUrls } from "../app.urls";
+import { ErrorMessages } from "../models/enums/error-messages.enum";
 
 export class BaseView {
     URLS = AppUrls;
+    ERROR_MESSAGES = ErrorMessages;
     locale: string = "pt-br";
     now = new Date();
     env = environment;

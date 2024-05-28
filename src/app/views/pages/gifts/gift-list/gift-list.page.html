@@ -22,7 +22,7 @@
             <div class="col-lg-9 order-lg-2">
                 <!-- start wpo-product-section -->
                 <div class="wpo-product-section">
-                    <div class="sorting-section">
+                    <!-- <div class="sorting-section">
                         <ul>
                             <li>Exibindo 1—10 de 80 itens</li>
                             <li>
@@ -34,203 +34,27 @@
                                 </select>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="wpo-product-wrap">
                         <div class="row">
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12" *ngFor="let gift of filterList">
                                 <div class="wpo-product-item">
                                     <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
+                                        <img [src]="gift.imageUrls[0]" alt="" />
                                         <ul>
                                             <li></li>
                                         </ul>
                                     </div>
                                     <div class="wpo-product-text">
                                         <h3>
-                                            <a [routerLink]="URLS.PATHS.GIFTS.DETAILS.ABSOLUTE_PATH()"
-                                                >Terno do noivo</a
-                                            >
+                                            <a [routerLink]="URLS.PATHS.GIFTS.DETAILS.ABSOLUTE_PATH()">
+                                                {{gift.name}}
+                                            </a>
                                         </h3>
                                         <ul>
-                                            <li>R$ 800,00</li>
+                                            <li>{{formatCurrency(gift.price)}}</li>
                                         </ul>
 
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Alianças de casamento</a></h3>
-                                        <ul>
-                                            <li>R$ 750,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Brincos da noiva</a></h3>
-                                        <ul>
-                                            <li>R$ 100,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Sapato da noiva</a></h3>
-                                        <ul>
-                                            <li>R$ 320,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Gravata do noivo</a></h3>
-                                        <ul>
-                                            <li>R$ 800,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Bolo do casamento</a></h3>
-                                        <ul>
-                                            <li>R$ 750,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Docinhos do casamento</a></h3>
-                                        <ul>
-                                            <li>R$ 100,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Cabelo e Maquiagem da noiva</a></h3>
-                                        <ul>
-                                            <li>R$ 320,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Passagens da lua de mel</a></h3>
-                                        <ul>
-                                            <li>R$ 800,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Hospedagem da lua de mel</a></h3>
-                                        <ul>
-                                            <li>R$ 750,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Passagens para o Canadá</a></h3>
-                                        <ul>
-                                            <li>R$ 100,00</li>
-                                        </ul>
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
-                                        >
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="wpo-product-item">
-                                    <div class="wpo-product-img">
-                                        <img src="https://placehold.co/300x400" alt="" />
-                                    </div>
-                                    <div class="wpo-product-text">
-                                        <h3><a href="shop-single.html">Hospedagem no Canadá</a></h3>
-                                        <ul>
-                                            <li>R$ 320,00</li>
-                                        </ul>
                                         <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
                                             >Adicionar ao carrinho</a
                                         >
@@ -254,20 +78,25 @@
                             </form>
                         </div>
                     </div>
+                    <div class="widget woocommerce">
+                        <h3>Ordernação</h3>
+                        <select name="sorting" id="sorting" class="select">
+                            <option value="menu_order" selected="selected">Padrão</option>
+                            <!-- <option value="date">Ordernar pelos mais recentes</option> -->
+                            <option value="price">Ordernar pelo menor preço</option>
+                            <option value="price-desc">Ordernar pelo maior preço</option>
+                        </select>
+                    </div>
+
                     <div class="widget woocommerce widget_product_categories">
                         <h3>Filtrar por categorias</h3>
                         <ul class="product-categories">
-                            <li class="cat-item cat-parent">
-                                <a href="#">Acessórios dos noivos</a>
-                            </li>
-                            <li class="cat-item">
-                                <a href="#">itens do casamento</a>
-                            </li>
-                            <li class="cat-item">
-                                <a href="#">Lua de mel</a>
-                            </li>
-                            <li class="cat-item">
-                                <a href="#">Canadá</a>
+                            <li
+                                class="cat-item"
+                                *ngFor="let category of categories; let i = index"
+                                [ngClass]="{'cat-parent': i===0}"
+                            >
+                                <a role="button" (click)="onFilterByCategory(category)">{{category}}</a>
                             </li>
                         </ul>
                     </div>
