@@ -24,7 +24,13 @@ export class AppUrls {
 
     public static readonly API_ENDPOINTS = {
         GIFTS: {
-            FIND_ALL: () => `http://localhost:3000/gifts`,
+            FIND_ALL: (): string => {
+                if (environment.production) {
+                    return `${environment.apiUrl}/gifts.json`;
+                }
+                return `http://localhost:3000/gifts`;
+                // return `https://casamento-raquel-igor-default-rtdb.firebaseio.com/gifts.json`;
+            },
         },
         RSVP: {
             POST_ANSWER: (): string => {

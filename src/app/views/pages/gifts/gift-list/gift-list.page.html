@@ -40,7 +40,7 @@
                             <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12" *ngFor="let gift of filterList">
                                 <div class="wpo-product-item">
                                     <div class="wpo-product-img">
-                                        <img [src]="gift.imageUrls[0]" alt="" />
+                                        <img [src]="gift.imageUrls[0]" alt="" style="max-height: 450px" />
                                         <ul>
                                             <li></li>
                                         </ul>
@@ -80,12 +80,12 @@
                     </div>
                     <div class="widget woocommerce">
                         <h3>Ordernação</h3>
-                        <select name="sorting" id="sorting" class="select">
-                            <option value="menu_order" selected="selected">Padrão</option>
-                            <!-- <option value="date">Ordernar pelos mais recentes</option> -->
-                            <option value="price">Ordernar pelo menor preço</option>
-                            <option value="price-desc">Ordernar pelo maior preço</option>
-                        </select>
+                        <app-select-single-choice
+                            #selectSortBy
+                            [options]="sortBySelectOptions"
+                            [initialSelectedValue]="sortBySelectOptions[0].value"
+                            (optionChanged)="onSortByChanged()"
+                        ></app-select-single-choice>
                     </div>
 
                     <div class="widget woocommerce widget_product_categories">
@@ -104,14 +104,29 @@
                         <h3>Filtrar por preço</h3>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Mínimo" aria-label="First name" />
+                                <app-input-text
+                                    #inputFilterByPriceMinimum
+                                    placeholder="Mínimo"
+                                    [modifier]="priceTextModifier"
+                                    [showClearButton]="true"
+                                ></app-input-text>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Máximo" aria-label="Last name" />
+                                <app-input-text
+                                    #inputFilterByPriceMaximum
+                                    placeholder="Máximo"
+                                    [modifier]="priceTextModifier"
+                                    [showClearButton]="true"
+                                ></app-input-text>
                             </div>
                         </div>
 
-                        <a href="cart.html" class="theme-btn d-block text-center px-4 py-2 fs-6 mt-3">Filtrar</a>
+                        <a
+                            role="button"
+                            class="theme-btn d-block text-center px-4 py-2 fs-6 mt-3"
+                            (click)="onFilterByPrice()"
+                            >Filtrar</a
+                        >
                     </div>
                     <div class="widget widget_best-seller">
                         <h3>MAIS PROCURADOS</h3>

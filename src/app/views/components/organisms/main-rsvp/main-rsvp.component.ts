@@ -29,12 +29,12 @@ export class MainRsvpComponent extends BaseFormView {
         },
     };
     rsvpQtyGuestSelectOptions: SelectOption[] = [
-        { value: "1", label: "01 (incluindo a mim)" },
-        { value: "2", label: "02 (incluindo a mim)" },
-        { value: "3", label: "03 (incluindo a mim)" },
-        { value: "4", label: "04 (incluindo a mim)" },
-        { value: "5", label: "05 (incluindo a mim)" },
-        { value: "6", label: "06 (incluindo a mim)" },
+        { value: "1", text: "01 (incluindo a mim)" },
+        { value: "2", text: "02 (incluindo a mim)" },
+        { value: "3", text: "03 (incluindo a mim)" },
+        { value: "4", text: "04 (incluindo a mim)" },
+        { value: "5", text: "05 (incluindo a mim)" },
+        { value: "6", text: "06 (incluindo a mim)" },
     ];
     rsvpAnswerInputOptions: InputOption[] = [
         { value: "true", label: "Sim, eu estarei lá!" },
@@ -85,6 +85,7 @@ export class MainRsvpComponent extends BaseFormView {
         const dto: RsvpAnswerDto = {
             name: this.inputName.getValue(),
             answer: this.rsvpForm.fields.answer,
+            answerDateTime: new Date(),
         };
         if (this.rsvpForm.fields.answer === true) {
             dto.guestQty = this.selectGuestQty.getSelectedValue().parseInt();

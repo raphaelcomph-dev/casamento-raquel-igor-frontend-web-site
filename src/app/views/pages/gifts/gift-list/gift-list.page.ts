@@ -1,7 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { BaseView } from "../../../base.view";
 import { GiftService } from "../../../../services/gift.service";
-import { GiftItemDto } from "../../../../models/gift.dto";
+import { GiftItemDto } from "../../../../models/gift-item.dto";
+import {
+    SelectOption,
+    SelectSingleChoiceComponent,
+} from "../../../components/atoms/select-single-choice/select-single-choice.component";
+import * as _ from "lodash";
+import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
+import { NumberInputTextModifier } from "../../../components/atoms/input-text/input-text-modifiers";
 
 @Component({
     selector: "app-gift-list",
@@ -9,9 +16,18 @@ import { GiftItemDto } from "../../../../models/gift.dto";
     styles: ``,
 })
 export class GiftListPage extends BaseView implements OnInit {
+    @ViewChild("selectSortBy") selectSortBy: SelectSingleChoiceComponent;
+    @ViewChild("inputFilterByPriceMinimum") inputFilterByPriceMinimum: InputTextComponent;
+    @ViewChild("inputFilterByPriceMaximum") inputFilterByPriceMaximum: InputTextComponent;
+    priceTextModifier = new NumberInputTextModifier();
     gifts: GiftItemDto[] = [];
     filterList: GiftItemDto[] = [];
     filterCategory: string;
+    sortBySelectOptions: SelectOption[] = [
+        { text: "Padrão", value: "name" },
+        { text: "Ordenar pelo menor preço", value: "lowest-first" },
+        { text: "Ordenar pelo maior preço", value: "highest-first" },
+    ];
 
     public get categories(): string[] {
         return this.gifts
@@ -26,7 +42,6 @@ export class GiftListPage extends BaseView implements OnInit {
 
     ngOnInit(): void {
         this.giftService.findAll().subscribe((gifts) => {
-            console.log("buscando a lista de presentes", gifts);
             this.gifts = gifts;
             this.applySortAndFilterToList();
         });
@@ -37,10 +52,50 @@ export class GiftListPage extends BaseView implements OnInit {
         this.applySortAndFilterToList();
     }
 
+    onSortByChanged(): void {
+        this.applySortAndFilterToList();
+    }
+
+    onFilterByPrice(): void {
+        this.applySortAndFilterToList();
+    }
+
     private applySortAndFilterToList(): void {
         this.filterList = this.gifts;
+        this.applySortToFilterList();
+        this.applyFilterByPriceToFilterList();
         if (this.filterCategory) {
             this.filterList = this.filterList.filter((gift) => gift.categories.includes(this.filterCategory));
+        }
+    }
+
+    private applySortToFilterList(): void {
+        const sortBy = this.selectSortBy.getSelectedValue();
+        switch (sortBy) {
+            case "name":
+                this.filterList = _.orderBy(this.filterList, ["name"], ["asc"]);
+                break;
+            case "lowest-first":
+                this.filterList = _.orderBy(this.filterList, ["price"], ["asc"]);
+                break;
+            case "highest-first":
+                this.filterList = _.orderBy(this.filterList, ["price"], ["desc"]);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private applyFilterByPriceToFilterList(): void {
+        if (this.inputFilterByPriceMaximum.getValue()) {
+            this.filterList = this.filterList.filter(
+                (e) => e.price <= this.inputFilterByPriceMaximum.getValue().parseFloat()
+            );
+        }
+        if (this.inputFilterByPriceMinimum.getValue()) {
+            this.filterList = this.filterList.filter(
+                (e) => e.price >= this.inputFilterByPriceMinimum.getValue().parseFloat()
+            );
         }
     }
 

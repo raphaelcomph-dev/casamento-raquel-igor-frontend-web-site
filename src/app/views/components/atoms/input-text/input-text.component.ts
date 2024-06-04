@@ -23,6 +23,7 @@ export class InputTextComponent extends BaseInputComponent implements OnInit {
     @Input() validators: BaseValidator[] = [];
     @Input() modifier: BaseInputTextModifier;
     @Input() readOnly: boolean = false;
+    @Input() showClearButton: boolean = false;
     protected value: string = "";
     protected isValidated: boolean = false;
     protected valid: boolean = true;
@@ -71,6 +72,10 @@ export class InputTextComponent extends BaseInputComponent implements OnInit {
         if (newValue) {
             this.value = newValue;
         }
+    }
+
+    protected onClearInput(): void {
+        this.value = "";
     }
 
     protected onChange(): void {

@@ -2,6 +2,7 @@ declare global {
     interface String {
         changeCase(caseName: "name" | "title" | "camelCase" | "constant" | "capitalize"): string;
         parseInt(): number;
+        parseFloat(): number;
         contains(str: string): boolean;
         removeNonDigits(): string;
         removeFormat(): string;
@@ -56,6 +57,17 @@ String.prototype.parseInt = function (): number | null {
         const parsedInt = parseInt(str, 10);
         if (!isNaN(parsedInt)) {
             return parsedInt;
+        }
+    }
+    return null;
+};
+
+String.prototype.parseFloat = function (): number | null {
+    const str = this.toString();
+    if (str) {
+        const parsedFloat = parseFloat(str);
+        if (!isNaN(parsedFloat)) {
+            return parsedFloat;
         }
     }
     return null;

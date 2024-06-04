@@ -10,7 +10,7 @@
     >
         <option value="" disabled>{{ placeholder || "Selecione uma opção" }}</option>
         <option *ngFor="let option of options" [value]="option.value">
-            {{ option.label }}
+            {{ option.text }}
         </option>
     </select>
     <div class="invalid-feedback" *ngIf="!valid && isValidated">

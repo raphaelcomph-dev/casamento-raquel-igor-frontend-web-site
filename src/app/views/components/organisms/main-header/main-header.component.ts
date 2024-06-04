@@ -11,16 +11,21 @@ export class MainHeaderComponent extends BaseView implements OnInit {
     isSticky = false;
     isBellowHeader = false;
 
+    sections = [];
+
     constructor(private el: ElementRef, private renderer: Renderer2) {
         super();
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.scrollTo();
+    }
 
     @HostListener("window:scroll", [])
     onWindowScroll() {
         this.isBellowHeader = window.pageYOffset > 90;
         this.isSticky = window.pageYOffset > 180;
+        this.setNavLinkAsActiveOnScroll();
     }
 
     showMenu(force?: boolean): void {
@@ -36,7 +41,7 @@ export class MainHeaderComponent extends BaseView implements OnInit {
         }
     }
 
-    scrollToSection(sectionId): void {
+    scrollToSection(sectionId: string): void {
         this.showMenu(false);
         if (sectionId) {
             this.currentSection = sectionId;
@@ -44,6 +49,47 @@ export class MainHeaderComponent extends BaseView implements OnInit {
         } else {
             this.scrollTo();
         }
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            const sections = document.querySelectorAll("section");
+            sections.forEach((section) => {
+                if (section.id) {
+                    // Use getBoundingClientRect to get the position of the element
+                    const rect = section.getBoundingClientRect();
+
+                    // rect.top gives you the distance from the top of the viewport to the top of the element
+                    const elementTop = rect.top;
+
+                    // rect.bottom gives you the distance from the top of the viewport to the bottom of the element
+                    const elementBottom = rect.bottom;
+
+                    this.sections.push({
+                        id: section.id,
+                        top: elementTop,
+                        bottom: elementBottom,
+                    });
+                }
+            });
+        }, 1500);
+    }
+
+    private setNavLinkAsActiveOnScroll(): void {
+        // Get the height of the viewport
+        // Get the top position of the viewport
+        const viewportTop = window.scrollY;
+
+        // Get the bottom position of the viewport
+        const viewportBottom = window.scrollY + window.innerHeight;
+        const viewportMiddle = (viewportBottom - viewportTop) / 2 + viewportTop;
+
+        this.sections.forEach((section) => {
+            if (viewportMiddle > section.top) {
+                this.currentSection = section.id;
+                return;
+            }
+        });
     }
 
     private scrollTo(elementId?: string, offsetY: number = 85): void {

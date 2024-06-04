@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { BaseInputComponent } from "../base-input.component";
 
 export interface SelectOption {
     value: string;
-    label: string;
+    text: string;
 }
 
 @Component({
@@ -21,6 +21,7 @@ export class SelectSingleChoiceComponent extends BaseInputComponent implements O
     @Input() readOnly: boolean = false;
     @Input() displayInline: boolean = false;
     @Input() fieldName: string;
+    @Output() optionChanged = new EventEmitter<string>();
     protected selectedValue: string = "";
     protected isValidated: boolean = false;
     protected valid: boolean = true;
@@ -59,5 +60,6 @@ export class SelectSingleChoiceComponent extends BaseInputComponent implements O
         if (this.isValidated) {
             this.validate();
         }
+        this.optionChanged.emit(this.selectedValue);
     }
 }

@@ -1,4 +1,4 @@
-<section class="wpo-portfolio-section section-padding" id="gallery">
+<section class="wpo-portfolio-section section-padding">
     <div class="container-fluid">
         <owl-carousel-o [options]="customOptions">
             <ng-template carouselSlide class="owl-item" *ngFor="let photoAssetUrl of photoList">
@@ -19,5 +19,22 @@
 
 <!-- Modal: show photo -->
 <ng-template #content let-modal>
+    <button
+        type="button"
+        class=""
+        aria-label="Close"
+        style="
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white !important;
+            background: transparent;
+            border: 0;
+            font-size: 2rem;
+        "
+        (click)="modal.dismiss('Cross click')"
+    >
+        <i class="fa-solid fa-xmark"></i>
+    </button>
     <img src="{{ zoomPhotoAssetUrl }}" alt="" />
 </ng-template>
