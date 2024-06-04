@@ -52,7 +52,6 @@ export class MainRsvpComponent extends BaseFormView {
     onSubmitRsvp(): void {
         if (this.isFormValid()) {
             this.rsvpForm.state = FormStateEnum.SUBMITTED_LOADING;
-
             const dto = this.extractDtoFromForm();
 
             this.rsvp.postRsvpAnswer(dto).subscribe({

@@ -49,7 +49,25 @@
                                     </div>
                                 </div>
                                 <div class="submit-area">
-                                    <button type="submit" class="theme-btn">Enviar resposta</button>
+                                    <button
+                                        type="submit"
+                                        class="theme-btn"
+                                        [disabled]="!isFormInEditableState(rsvpForm.state)"
+                                    >
+                                        <span *ngIf="isFormInLoadingState(rsvpForm.state)">
+                                            <span
+                                                class="spinner-border spinner-border-sm me-3"
+                                                aria-hidden="true"
+                                            ></span>
+                                            <span>Enviando...</span>
+                                        </span>
+                                        <span *ngIf="isFormInEditableState(rsvpForm.state)">
+                                            <span>Enviar resposta</span>
+                                        </span>
+                                        <span *ngIf="isFormInSuccessState(rsvpForm.state)">
+                                            <span>Resposta enviada!</span>
+                                        </span>
+                                    </button>
                                     <div id="c-loader">
                                         <i class="ti-reload"></i>
                                     </div>

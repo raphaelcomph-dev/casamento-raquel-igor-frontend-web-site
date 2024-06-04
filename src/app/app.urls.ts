@@ -27,7 +27,12 @@ export class AppUrls {
             FIND_ALL: () => `http://localhost:3000/gifts`,
         },
         RSVP: {
-            POST_ANSWER: () => `http://localhost:3000/rsvp`,
+            POST_ANSWER: (): string => {
+                if (environment.production) {
+                    return `${environment.apiUrl}/rsvp.json`;
+                }
+                return `http://localhost:3000/rsvp`;
+            },
         },
     };
 }
