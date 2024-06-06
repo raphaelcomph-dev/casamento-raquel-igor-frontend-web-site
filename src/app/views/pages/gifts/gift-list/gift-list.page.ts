@@ -22,7 +22,8 @@ export class GiftListPage extends BaseView implements OnInit {
     priceTextModifier = new NumberInputTextModifier();
     gifts: GiftItemDto[] = [];
     filterList: GiftItemDto[] = [];
-    filterCategory: string;
+    filterCategories: string[] = [];
+    searchText: string = "";
     sortBySelectOptions: SelectOption[] = [
         { text: "Padrão", value: "name" },
         { text: "Ordenar pelo menor preço", value: "lowest-first" },
@@ -48,7 +49,9 @@ export class GiftListPage extends BaseView implements OnInit {
     }
 
     onFilterByCategory(category): void {
-        this.filterCategory = category;
+        this.filterCategories = this.filterCategories.includes(category)
+            ? this.filterCategories.filter((e) => e !== category)
+            : this.filterCategories.concat([category]);
         this.applySortAndFilterToList();
     }
 
@@ -60,13 +63,19 @@ export class GiftListPage extends BaseView implements OnInit {
         this.applySortAndFilterToList();
     }
 
+    onFilterBySearch(): void {
+        this.applySortAndFilterToList();
+    }
+
     private applySortAndFilterToList(): void {
         this.filterList = this.gifts;
         this.applySortToFilterList();
+        this.applyFilterBySearchTextToFilterList();
         this.applyFilterByPriceToFilterList();
-        if (this.filterCategory) {
-            this.filterList = this.filterList.filter((gift) => gift.categories.includes(this.filterCategory));
-        }
+        this.applyFilterByCategoriesToFilterList();
+        // if (this.filterCategory) {
+        //     this.filterList = this.filterList.filter((gift) => gift.categories.includes(this.filterCategory));
+        // }
     }
 
     private applySortToFilterList(): void {
@@ -86,16 +95,30 @@ export class GiftListPage extends BaseView implements OnInit {
         }
     }
 
-    private applyFilterByPriceToFilterList(): void {
-        if (this.inputFilterByPriceMaximum.getValue()) {
-            this.filterList = this.filterList.filter(
-                (e) => e.price <= this.inputFilterByPriceMaximum.getValue().parseFloat()
+    private applyFilterBySearchTextToFilterList(): void {
+        this.filterList = this.filterList.filter((gift) =>
+            gift.name.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+    }
+
+    private applyFilterByCategoriesToFilterList(): void {
+        if (this.filterCategories.length) {
+            this.filterList = this.filterList.filter((gift) =>
+                gift.categories.some((category) => this.filterCategories.includes(category))
             );
         }
-        if (this.inputFilterByPriceMinimum.getValue()) {
-            this.filterList = this.filterList.filter(
-                (e) => e.price >= this.inputFilterByPriceMinimum.getValue().parseFloat()
-            );
+    }
+
+    private applyFilterByPriceToFilterList(): void {
+        debugger;
+        const minPrice = this.inputFilterByPriceMinimum.getValue();
+        const maxPrice = this.inputFilterByPriceMaximum.getValue();
+
+        if (maxPrice) {
+            this.filterList = this.filterList.filter((e) => e.price <= maxPrice.parseFloat());
+        }
+        if (minPrice) {
+            this.filterList = this.filterList.filter((e) => e.price >= minPrice.parseFloat());
         }
     }
 

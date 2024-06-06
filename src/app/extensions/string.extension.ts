@@ -2,7 +2,7 @@ declare global {
     interface String {
         changeCase(caseName: "name" | "title" | "camelCase" | "constant" | "capitalize"): string;
         parseInt(): number;
-        parseFloat(): number;
+        parseFloat(locale?: string): number;
         contains(str: string): boolean;
         removeNonDigits(): string;
         removeFormat(): string;
@@ -62,9 +62,12 @@ String.prototype.parseInt = function (): number | null {
     return null;
 };
 
-String.prototype.parseFloat = function (): number | null {
+String.prototype.parseFloat = function (locale: string = "BRL"): number | null {
     const str = this.toString();
     if (str) {
+        if (locale == "BRL") {
+            return parseFloat(str.replaceAll(".", "").replaceAll(",", "."));
+        }
         const parsedFloat = parseFloat(str);
         if (!isNaN(parsedFloat)) {
             return parsedFloat;

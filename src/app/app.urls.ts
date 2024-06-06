@@ -28,8 +28,8 @@ export class AppUrls {
                 if (environment.production) {
                     return `${environment.apiUrl}/gifts.json`;
                 }
-                return `http://localhost:3000/gifts`;
-                // return `https://casamento-raquel-igor-default-rtdb.firebaseio.com/gifts.json`;
+                // return `http://localhost:3000/gifts`;
+                return `https://casamento-raquel-igor-default-rtdb.firebaseio.com/gifts.json`;
             },
         },
         RSVP: {

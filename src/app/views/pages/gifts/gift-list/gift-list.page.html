@@ -1,4 +1,5 @@
 <app-main-header></app-main-header>
+<!-- TODO: corrigir o header nas páginas de lista e detalhes do presente -->
 
 <section class="wpo-page-title">
     <div class="preview-panel-wrap">
@@ -40,6 +41,7 @@
                             <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12" *ngFor="let gift of filterList">
                                 <div class="wpo-product-item">
                                     <div class="wpo-product-img">
+                                        <!-- TODO: corrigir o tamanho da imagem no mobile -->
                                         <img [src]="gift.imageUrls[0]" alt="" style="max-height: 450px" />
                                         <ul>
                                             <li></li>
@@ -70,10 +72,17 @@
                 <div class="wpo-shop-sidebar">
                     <div class="widget widget_search">
                         <div class="search-widget">
-                            <form class="searchform">
+                            <form class="searchform" (ngSubmit)="onFilterBySearch()">
                                 <div>
-                                    <input type="text" placeholder="Nome do presente..." />
-                                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                    <input
+                                        type="text"
+                                        placeholder="Nome do presente..."
+                                        name="search"
+                                        [(ngModel)]="searchText"
+                                    />
+                                    <button type="submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -90,13 +99,19 @@
 
                     <div class="widget woocommerce widget_product_categories">
                         <h3>Filtrar por categorias</h3>
-                        <ul class="product-categories">
+                        <ul class="list-group list-group-flush">
                             <li
-                                class="cat-item"
+                                class="list-group-item"
                                 *ngFor="let category of categories; let i = index"
-                                [ngClass]="{'cat-parent': i===0}"
+                                [ngClass]="{'active': filterCategories.includes(category)}"
                             >
-                                <a role="button" (click)="onFilterByCategory(category)">{{category}}</a>
+                                <a
+                                    role="button"
+                                    class="w-100"
+                                    [ngClass]="{'text-white': filterCategories.includes(category)}"
+                                    (click)="onFilterByCategory(category)"
+                                    >{{category}}</a
+                                >
                             </li>
                         </ul>
                     </div>
