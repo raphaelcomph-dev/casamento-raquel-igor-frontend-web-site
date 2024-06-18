@@ -17,6 +17,10 @@ export class AppUrls {
                 ABSOLUTE_PATH: () => `${AppUrls.PATHS.GIFTS.ABSOLUTE_PATH()}/detalhes`,
                 RELATIVE_PATH: () => `${AppUrls.PATHS.GIFTS.RELATIVE_PATH()}/detalhes`,
             },
+            CHECKOUT: {
+                ABSOLUTE_PATH: () => `${AppUrls.PATHS.GIFTS.ABSOLUTE_PATH()}/pagamento`,
+                RELATIVE_PATH: () => `${AppUrls.PATHS.GIFTS.RELATIVE_PATH()}/pagamento`,
+            },
         },
     };
 

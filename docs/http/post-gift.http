@@ -1,0 +1,15 @@
+
+@base_url = https://casamento-raquel-igor-default-rtdb.firebaseio.com
+ 
+POST {{base_url}}/gifts.json
+Content-Type: application/json
+
+{
+    "name": "Pacote de spa para a noiva",
+    "description": "",
+    "price": 483,
+    "imageUrls": ["https://i.pinimg.com/564x/74/02/36/740236c045952ffc4aba1192a8cf51f7.jpg"],
+    "isAvailable": "true",
+    "categories": ["Dia da noiva"]
+}
+###

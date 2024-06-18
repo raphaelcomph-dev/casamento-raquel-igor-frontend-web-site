@@ -69,13 +69,6 @@
         cursor: pointer;
         background: transparentize($theme-primary-color, 0.8);
     }
-    .coupon:before {
-        position: absolute;
-        right: 30px;
-        top: 21px;
-        content: "\e64b";
-        font-family: "themify";
-    }
     .coupon span {
         position: absolute;
         right: 30px;

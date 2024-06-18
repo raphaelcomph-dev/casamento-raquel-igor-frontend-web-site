@@ -11,7 +11,7 @@ import { InputTextComponent } from "../../../components/atoms/input-text/input-t
 import { NumberInputTextModifier } from "../../../components/atoms/input-text/input-text-modifiers";
 
 @Component({
-    selector: "app-gift-list",
+    selector: "gift-list-page",
     templateUrl: "./gift-list.page.html",
     styles: ``,
 })
@@ -110,7 +110,6 @@ export class GiftListPage extends BaseView implements OnInit {
     }
 
     private applyFilterByPriceToFilterList(): void {
-        debugger;
         const minPrice = this.inputFilterByPriceMinimum.getValue();
         const maxPrice = this.inputFilterByPriceMaximum.getValue();
 

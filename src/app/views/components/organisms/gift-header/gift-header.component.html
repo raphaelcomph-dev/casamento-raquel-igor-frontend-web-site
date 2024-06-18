@@ -1,0 +1,141 @@
+<header id="header" [ngStyle]="{ 'padding-top': isBellowHeader ? '90px' : '0px' }">
+    <div class="wpo-site-header wpo-header-style-3">
+        <nav
+            class="navigation navbar navbar-expand-lg navbar-light"
+            [ngClass]="{ 'sticky-on': isSticky, 'sticky-header': isBellowHeader }"
+            style="z-index: 10 !important"
+        >
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-4 col-2">
+                        <ul class="nav navbar-nav mb-2 mb-lg-0">
+                            <li class="py-2 py-lg-4">
+                                <a role="button" [routerLink]="returnToLink">
+                                    <i class="fa-solid fa-arrow-left me-2"></i>
+                                    <span class="d-none d-lg-inline">{{ returnToText }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col text-center">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" role="button">Raquel & Igor</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-2">
+                        <div class="float-end">
+                            <a role="button" (click)="openEnd(content)">
+                                <i class="fa-solid fa-cart-shopping text-body fa-xl"></i>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
+                                >
+                                    2
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="mini-cart d-none">
+                            <button class="cart-toggle-btn">
+                                <i class="fa-solid fa-cart-shopping"></i> <span class="cart-count">2</span>
+                            </button>
+                            <div class="mini-cart-content">
+                                <button class="mini-cart-close"><i class="ti-close"></i></button>
+                                <div class="mini-cart-items">
+                                    <div class="mini-cart-item clearfix">
+                                        <div class="mini-cart-item-image">
+                                            <a href="shop.html"
+                                                ><img src="assets/images/shop/mini-cart/img-1.jpg" alt=""
+                                            /></a>
+                                        </div>
+                                        <div class="mini-cart-item-des">
+                                            <a href="shop.html">Wedding Gown</a>
+                                            <span class="mini-cart-item-price">$20.15 x 1</span>
+                                            <span class="mini-cart-item-quantity"
+                                                ><a href="#"><i class="ti-close"></i></a
+                                            ></span>
+                                        </div>
+                                    </div>
+                                    <div class="mini-cart-item clearfix">
+                                        <div class="mini-cart-item-image">
+                                            <a href="shop.html"
+                                                ><img src="assets/images/shop/mini-cart/img-2.jpg" alt=""
+                                            /></a>
+                                        </div>
+                                        <div class="mini-cart-item-des">
+                                            <a href="shop.html">Bridal Flower</a>
+                                            <span class="mini-cart-item-price">$13.25 x 2</span>
+                                            <span class="mini-cart-item-quantity"
+                                                ><a href="#"><i class="ti-close"></i></a
+                                            ></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mini-cart-action clearfix">
+                                    <span class="mini-checkout-price">Subtotal: <span>$215.14</span></span>
+                                    <div class="mini-btn">
+                                        <a href="checkout.html" class="view-cart-btn s1">Checkout</a>
+                                        <a href="cart.html" class="view-cart-btn">View Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of container -->
+        </nav>
+    </div>
+</header>
+
+<ng-template #content let-offcanvas>
+    <div class="offcanvas-header">
+        <h1 class="offcanvas-title">Carrinho de Presentes</h1>
+        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="cart-items">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="float-start me-3">
+                        <img src="https://placehold.co/400x600" class="" style="max-width: 50px" alt="" />
+                    </div>
+                    <div class="d-flex w-75 justify-content-between">
+                        <p class="mb-1 fs-6">Aulas De Surfe</p>
+                        <small>
+                            <i class="fa-solid fa-trash"></i>
+                        </small>
+                    </div>
+                    <!-- <p class="mb-1">Some placeholder content in a paragraph.</p>
+                     -->
+                    <small class="text-body-tertiary" style="font-size: smaller">R$ 350,00 x 1</small>
+                </li>
+                <li class="list-group-item">
+                    <div class="float-start me-3">
+                        <img src="https://placehold.co/400x600" class="" style="max-width: 50px" alt="" />
+                    </div>
+                    <div class="d-flex w-75 justify-content-between">
+                        <p class="mb-1 fs-6">Aula De Yoga Em Uma Praia Tranquila</p>
+                        <small>
+                            <i class="fa-solid fa-trash"></i>
+                        </small>
+                    </div>
+                    <!-- <p class="mb-1">Some placeholder content in a paragraph.</p>
+                     -->
+                    <small class="text-body-tertiary" style="font-size: smaller">R$ 220,00 x 1</small>
+                </li>
+            </ul>
+        </div>
+        <div id="cart-actions" class="position-absolute bottom-0 pb-5 text-center" style="left: 26.5%">
+            <div class="mini-cart-action clearfix">
+                <div class="text-center">
+                    <span class="mini-checkout-price">Total: <span>R$ 750,00</span></span>
+                </div>
+                <div class="mini-btn">
+                    <a role="button" class="view-cart-btn" [routerLink]="URLS.PATHS.GIFTS.CHECKOUT.ABSOLUTE_PATH()"
+                        >Pagamento</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

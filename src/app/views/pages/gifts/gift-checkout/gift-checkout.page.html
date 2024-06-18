@@ -1,0 +1,85 @@
+<app-gift-header></app-gift-header>
+
+<app-gift-hero></app-gift-hero>
+
+<div class="wpo-checkout-area section-padding">
+    <div class="container">
+        <div class="checkout-wrap">
+            <div class="row">
+                <div class="col-lg-8 col-12">
+                    <form (ngSubmit)="onSubmitMessage()">
+                        <div class="caupon-wrap s2">
+                            <div class="biling-item">
+                                <div class="coupon coupon-3">
+                                    <label>Deixe uma mensagem para os noivos</label>
+                                </div>
+                                <div class="billing-adress" id="open2">
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <app-input-text
+                                                #inputName
+                                                label="Seu nome"
+                                                [required]="true"
+                                            ></app-input-text>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <app-input-text
+                                                #inputPhone
+                                                label="Seu telefone"
+                                                [required]="true"
+                                            ></app-input-text>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <app-input-text #inputEmail label="Seu email"></app-input-text>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <app-input-text-area
+                                                #textAreaMessage
+                                                label="Sua mensagem"
+                                                [required]="true"
+                                            ></app-input-text-area>
+                                        </div>
+                                    </div>
+
+                                    <div class="submit-btn-area">
+                                        <ul>
+                                            <li>
+                                                <button class="theme-btn-s4" type="submit">Enviar mensagem</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="cout-order-area">
+                        <div class="oreder-item">
+                            <ul>
+                                <li class="o-header">Seus presentes<span>( 1 )</span></li>
+                                <li class="d-flex justify-content-between">
+                                    <span class="w-75">Barbearia para cuidados com a barba e cabelo</span
+                                    ><span>R$ 210,00</span>
+                                </li>
+                                <li class="o-bottom">Valor total:<span> R$ 730,00</span></li>
+                                <li class="o-bottom pb-1">
+                                    <a role="button" class="view-cart-btn px-3 w-100 text-center">Pagar via PIX</a>
+                                </li>
+                                <li class="pt-1">
+                                    <a role="button" class="view-cart-btn px-3 w-100 text-center">Pagar com Cartão</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

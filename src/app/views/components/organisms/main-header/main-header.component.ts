@@ -91,17 +91,4 @@ export class MainHeaderComponent extends BaseView implements OnInit {
             }
         });
     }
-
-    private scrollTo(elementId?: string, offsetY: number = 85): void {
-        setTimeout(() => {
-            if (elementId) {
-                const element = document.getElementById(elementId);
-                const y = element.getBoundingClientRect().top + window.scrollY - offsetY;
-
-                window.scrollTo({ top: y, behavior: "smooth" });
-            } else {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-        }, 100);
-    }
 }
