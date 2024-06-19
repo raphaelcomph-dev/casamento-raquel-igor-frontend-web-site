@@ -13,7 +13,11 @@
                             <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12" *ngFor="let gift of filterList">
                                 <div class="wpo-product-item">
                                     <div class="wpo-product-img">
-                                        <img [src]="gift.imageUrls[0]" alt="" style="max-width: 300px" />
+                                        <img
+                                            [src]="gift.imageUrls[0]"
+                                            alt=""
+                                            style="max-width: 300px; max-height: 450px"
+                                        />
                                         <ul>
                                             <li></li>
                                         </ul>
