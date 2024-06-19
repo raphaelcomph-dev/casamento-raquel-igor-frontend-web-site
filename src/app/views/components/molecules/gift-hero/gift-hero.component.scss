@@ -1,0 +1,11 @@
+.wpo-page-title {
+    background: url(/assets/images/gift-hero.jpeg) no-repeat center -93px / cover;
+
+    @media (max-width: 991px) {
+        background: url(/assets/images/gift-hero.jpeg) no-repeat center -6px / cover;
+    }
+
+    @media (max-width: 575px) {
+        background: url(/assets/images/gift-hero.jpeg) no-repeat center -6px / cover;
+    }
+}
