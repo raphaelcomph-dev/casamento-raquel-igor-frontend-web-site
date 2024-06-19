@@ -7,21 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 order-lg-2">
-                <!-- start wpo-product-section -->
                 <div class="wpo-product-section">
-                    <!-- <div class="sorting-section">
-                        <ul>
-                            <li>Exibindo 1—10 de 80 itens</li>
-                            <li>
-                                <select name="sorting" id="sorting" class="select">
-                                    <option value="menu_order" selected="selected">Ordernação padrão</option>
-                                    <option value="date">Ordernar pelos mais recentes</option>
-                                    <option value="price">Ordernar pelo menor preço</option>
-                                    <option value="price-desc">Ordernar pelo maior preço</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </div> -->
                     <div class="wpo-product-wrap">
                         <div class="row">
                             <div class="col col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12" *ngFor="let gift of filterList">
@@ -33,9 +19,7 @@
                                         </ul>
                                     </div>
                                     <div class="wpo-product-text">
-                                        <h3>
-                                            <span> {{gift.name}} </span>
-                                        </h3>
+                                        <span class="wpo-product-title"> {{gift.name}} </span>
                                         <ul>
                                             <li>{{formatCurrency(gift.price)}}</li>
                                         </ul>
@@ -53,7 +37,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- end wpo-product-section -->
             </div>
             <div class="col-lg-3 col-md-8 order-lg-1">
                 <div class="wpo-shop-sidebar">

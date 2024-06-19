@@ -78,7 +78,7 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
     }
 
     onPayWithPIX(content: TemplateRef<any>): void {
-        this.modalService.open(content, { size: "lg", scrollable: true, centered: true });
+        this.modalService.open(content, { fullscreen: true });
     }
 
     private isFormValid(): boolean {
