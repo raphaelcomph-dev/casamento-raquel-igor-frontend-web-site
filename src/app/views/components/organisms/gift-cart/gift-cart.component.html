@@ -1,1 +1,41 @@
-<p>gift-cart works!</p>
+<div *ngIf="cartItems.length === 0" class="text-center pb-5">
+    <div class="text-center py-3">
+        <img alt="" src="assets/images/storyset/Gift-rafiki.png" style="width: 30%; min-width: 180px" />
+    </div>
+
+    <p class="text-gray-400 mb-4 fs-5">
+        Seu carrinho está vazio. <br />
+        <br />
+        Escolha um presente da lista e clique em "adicionar ao carrinho".
+    </p>
+</div>
+<div *ngIf="cartItems.length > 0">
+    <div id="cart-items">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let gift of cartItems">
+                <div class="float-start me-3">
+                    <img src="{{ gift.imageUrls[0] }}" class="" style="max-width: 50px" alt="" />
+                </div>
+                <div class="d-flex w-75 justify-content-between">
+                    <p class="mb-1 fs-6 pe-2">{{ gift.name }}</p>
+                    <small>
+                        <i class="fa-solid fa-trash" role="button" (click)="onRemoveGift(gift.id)"></i>
+                    </small>
+                </div>
+                <small class="text-body-tertiary" style="font-size: smaller">{{ formatCurrency(gift.price) }}</small>
+            </li>
+        </ul>
+    </div>
+    <div id="cart-actions" class="position-absolute bottom-0 pb-5 text-center" style="left: 26.5%">
+        <div class="mini-cart-action clearfix">
+            <div class="text-center">
+                <span class="mini-checkout-price"
+                    >Total: <span>{{ formatCurrency(total) }}</span></span
+                >
+            </div>
+            <div class="mini-btn">
+                <a role="button" class="view-cart-btn" (click)="onGoToCheckoutPage()">Pagamento</a>
+            </div>
+        </div>
+    </div>
+</div>

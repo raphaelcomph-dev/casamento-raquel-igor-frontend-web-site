@@ -36,16 +36,18 @@
                                     </div>
                                     <div class="wpo-product-text">
                                         <h3>
-                                            <a [routerLink]="URLS.PATHS.GIFTS.DETAILS.ABSOLUTE_PATH()">
-                                                {{gift.name}}
-                                            </a>
+                                            <span> {{gift.name}} </span>
                                         </h3>
                                         <ul>
                                             <li>{{formatCurrency(gift.price)}}</li>
                                         </ul>
 
-                                        <a href="cart.html" class="theme-btn px-4 py-2 fs-6 mt-3"
-                                            >Adicionar ao carrinho</a
+                                        <a
+                                            role="button"
+                                            class="theme-btn px-4 py-2 fs-6 mt-3"
+                                            (click)="onAddToCart(gift.id)"
+                                        >
+                                            Adicionar ao carrinho</a
                                         >
                                     </div>
                                 </div>

@@ -24,12 +24,13 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-2">
                         <div class="float-end">
-                            <a role="button" (click)="openEnd(content)">
+                            <a role="button" (click)="showCart(content)">
                                 <i class="fa-solid fa-cart-shopping text-body fa-xl"></i>
                                 <span
                                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
+                                    *ngIf="cartCount > 0"
                                 >
-                                    2
+                                    {{ cartCount }}
                                 </span>
                             </a>
                         </div>
@@ -93,49 +94,6 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
     </div>
     <div class="offcanvas-body">
-        <div id="cart-items">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <div class="float-start me-3">
-                        <img src="https://placehold.co/400x600" class="" style="max-width: 50px" alt="" />
-                    </div>
-                    <div class="d-flex w-75 justify-content-between">
-                        <p class="mb-1 fs-6">Aulas De Surfe</p>
-                        <small>
-                            <i class="fa-solid fa-trash"></i>
-                        </small>
-                    </div>
-                    <!-- <p class="mb-1">Some placeholder content in a paragraph.</p>
-                     -->
-                    <small class="text-body-tertiary" style="font-size: smaller">R$ 350,00 x 1</small>
-                </li>
-                <li class="list-group-item">
-                    <div class="float-start me-3">
-                        <img src="https://placehold.co/400x600" class="" style="max-width: 50px" alt="" />
-                    </div>
-                    <div class="d-flex w-75 justify-content-between">
-                        <p class="mb-1 fs-6">Aula De Yoga Em Uma Praia Tranquila</p>
-                        <small>
-                            <i class="fa-solid fa-trash"></i>
-                        </small>
-                    </div>
-                    <!-- <p class="mb-1">Some placeholder content in a paragraph.</p>
-                     -->
-                    <small class="text-body-tertiary" style="font-size: smaller">R$ 220,00 x 1</small>
-                </li>
-            </ul>
-        </div>
-        <div id="cart-actions" class="position-absolute bottom-0 pb-5 text-center" style="left: 26.5%">
-            <div class="mini-cart-action clearfix">
-                <div class="text-center">
-                    <span class="mini-checkout-price">Total: <span>R$ 750,00</span></span>
-                </div>
-                <div class="mini-btn">
-                    <a role="button" class="view-cart-btn" [routerLink]="URLS.PATHS.GIFTS.CHECKOUT.ABSOLUTE_PATH()"
-                        >Pagamento</a
-                    >
-                </div>
-            </div>
-        </div>
+        <app-gift-cart></app-gift-cart>
     </div>
 </ng-template>

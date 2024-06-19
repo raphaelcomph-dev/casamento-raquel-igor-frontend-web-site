@@ -61,14 +61,18 @@
                     <div class="cout-order-area">
                         <div class="oreder-item">
                             <ul>
-                                <li class="o-header">Seus presentes<span>( 1 )</span></li>
-                                <li class="d-flex justify-content-between">
-                                    <span class="w-75">Barbearia para cuidados com a barba e cabelo</span
-                                    ><span>R$ 210,00</span>
+                                <li class="o-header">Seus presentes<span>( {{gifts.length}} )</span></li>
+                                <li class="d-flex justify-content-between" *ngFor="let gift of gifts">
+                                    <span class="w-75">{{gift.name}}</span><span>{{formatCurrency(gift.price)}}</span>
                                 </li>
-                                <li class="o-bottom">Valor total:<span> R$ 730,00</span></li>
+                                <li class="o-bottom">Valor total:<span>{{formatCurrency(total)}}</span></li>
                                 <li class="o-bottom pb-1">
-                                    <a role="button" class="view-cart-btn px-3 w-100 text-center">Pagar via PIX</a>
+                                    <a
+                                        role="button"
+                                        class="view-cart-btn px-3 w-100 text-center"
+                                        (click)="onPayWithPIX(content)"
+                                        >Pagar via PIX</a
+                                    >
                                 </li>
                                 <li class="pt-1">
                                     <a role="button" class="view-cart-btn px-3 w-100 text-center">Pagar com Cartão</a>
@@ -81,5 +85,12 @@
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <iframe [src]="pixUrl" frameborder="0" height="600px"></iframe>
+</ng-template>
 
 <app-footer></app-footer>

@@ -1,7 +1,8 @@
-import { Component, HostListener, Input, OnInit, TemplateRef } from "@angular/core";
+import { Component, HostListener, Input, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { BaseView } from "../../../base.view";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 import { AppUrls } from "../../../../app.urls";
+import { GiftService } from "../../../../services/gift.service";
 
 @Component({
     selector: "app-gift-header",
@@ -11,6 +12,7 @@ import { AppUrls } from "../../../../app.urls";
 export class GiftHeaderComponent extends BaseView implements OnInit {
     isBellowHeader = false;
     isSticky = false;
+    cartCount = 0;
     static returnToOptions = [
         {
             value: "main-page",
@@ -32,12 +34,15 @@ export class GiftHeaderComponent extends BaseView implements OnInit {
         return GiftHeaderComponent.returnToOptions.find((option) => option.value === this.returnTo)?.link;
     }
 
-    constructor(private offcanvasService: NgbOffcanvas) {
+    constructor(private offcanvasService: NgbOffcanvas, private giftService: GiftService) {
         super();
     }
 
     ngOnInit(): void {
         this.scrollTo();
+        this.giftService.cartItemsCount$.subscribe((count) => {
+            this.cartCount = count;
+        });
     }
 
     @HostListener("window:scroll", [])
@@ -59,7 +64,7 @@ export class GiftHeaderComponent extends BaseView implements OnInit {
         }
     }
 
-    openEnd(content: TemplateRef<any>) {
+    showCart(content: TemplateRef<any>) {
         this.offcanvasService.open(content, { position: "end" });
     }
 

@@ -35,6 +35,12 @@ export class AppUrls {
                 // return `http://localhost:3000/gifts`;
                 return `https://casamento-raquel-igor-default-rtdb.firebaseio.com/gifts.json`;
             },
+            PAYMENT: {
+                PIX: (totalPrice: number): string => {
+                    // return `http://gerarqrcodepix.com.br/api/v1?nome=Igor Resende Pinheiro&cidade=Recife&saida=br&txid=PresenteCasorioRaquelIgor&valor=299.50&chave=+5581998212130`;
+                    return `https://pix.ae?chave=f10f3e71-3ee4-4da1-825f-dab3c4056c9a&tipo=aleatoria&nome=Igor Resende Pinheiro&valor=${totalPrice}&info=Presente de Raquel e Igor&txid=PresenteCasamento`;
+                },
+            },
         },
         RSVP: {
             POST_ANSWER: (): string => {

@@ -67,15 +67,17 @@ export class GiftListPage extends BaseView implements OnInit {
         this.applySortAndFilterToList();
     }
 
+    onAddToCart(giftId: string): void {
+        const gift = this.gifts.find((gift) => gift.id === giftId);
+        this.giftService.addToCart(gift);
+    }
+
     private applySortAndFilterToList(): void {
         this.filterList = this.gifts;
         this.applySortToFilterList();
         this.applyFilterBySearchTextToFilterList();
         this.applyFilterByPriceToFilterList();
         this.applyFilterByCategoriesToFilterList();
-        // if (this.filterCategory) {
-        //     this.filterList = this.filterList.filter((gift) => gift.categories.includes(this.filterCategory));
-        // }
     }
 
     private applySortToFilterList(): void {
@@ -120,6 +122,4 @@ export class GiftListPage extends BaseView implements OnInit {
             this.filterList = this.filterList.filter((e) => e.price >= minPrice.parseFloat());
         }
     }
-
-    // TODO: arrumar uma forma de limpar os filtros
 }
