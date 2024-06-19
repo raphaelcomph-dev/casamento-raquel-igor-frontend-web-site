@@ -46,6 +46,12 @@ export class InputTextAreaComponent extends BaseInputComponent implements OnInit
         return this.value;
     }
 
+    changeValue(newValue: string): void {
+        if (newValue) {
+            this.value = newValue;
+        }
+    }
+
     protected onChange(event: any): void {
         if (this.isValidated) {
             this.validate();

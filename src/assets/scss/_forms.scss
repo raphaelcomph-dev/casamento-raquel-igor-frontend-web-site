@@ -28,6 +28,9 @@ textarea {
         font-size: 16px !important;
         color: #bdbec2 !important;
     }
+    &.is-invalid {
+        border-color: var(--bs-form-invalid-border-color) !important;
+    }
 }
 
 .form-control {

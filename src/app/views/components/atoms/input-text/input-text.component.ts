@@ -52,7 +52,7 @@ export class InputTextComponent extends BaseInputComponent implements OnInit {
             console.info(`Componente ${this.fieldName} está inválido por motivos de erro de máscara`);
         } else if (this.validators.length) {
             this.validators.forEach((v) => {
-                if (!v.isValid(this.value)) {
+                if (this.value && !v.isValid(this.value)) {
                     this.valid = false;
                     this.errorMessage = v.errorMessage
                         ? v.errorMessage

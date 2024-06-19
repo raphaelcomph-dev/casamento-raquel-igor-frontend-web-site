@@ -20,6 +20,7 @@
                                                 #inputName
                                                 label="Seu nome"
                                                 [required]="true"
+                                                [readOnly]="!isFormInEditableState(messageFormState)"
                                             ></app-input-text>
                                         </div>
                                     </div>
@@ -28,11 +29,20 @@
                                             <app-input-text
                                                 #inputPhone
                                                 label="Seu telefone"
+                                                type="tel"
+                                                [mask]="PHONE_MASK"
                                                 [required]="true"
+                                                [readOnly]="!isFormInEditableState(messageFormState)"
                                             ></app-input-text>
                                         </div>
                                         <div class="col-12 col-md-6 mb-3">
-                                            <app-input-text #inputEmail label="Seu email"></app-input-text>
+                                            <app-input-text
+                                                #inputEmail
+                                                type="email"
+                                                label="Seu email"
+                                                [validators]="[emailInputTextValidator]"
+                                                [readOnly]="!isFormInEditableState(messageFormState)"
+                                            ></app-input-text>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -41,6 +51,7 @@
                                                 #textAreaMessage
                                                 label="Sua mensagem"
                                                 [required]="true"
+                                                [readOnly]="!isFormInEditableState(messageFormState)"
                                             ></app-input-text-area>
                                         </div>
                                     </div>
@@ -48,7 +59,25 @@
                                     <div class="submit-btn-area">
                                         <ul>
                                             <li>
-                                                <button class="theme-btn-s4" type="submit">Enviar mensagem</button>
+                                                <button
+                                                    class="theme-btn-s4"
+                                                    type="submit"
+                                                    [disabled]="!isFormInEditableState(messageFormState)"
+                                                >
+                                                    <span *ngIf="isFormInLoadingState(messageFormState)">
+                                                        <span
+                                                            class="spinner-border spinner-border-sm me-3"
+                                                            aria-hidden="true"
+                                                        ></span>
+                                                        <span>Enviando...</span>
+                                                    </span>
+                                                    <span *ngIf="isFormInEditableState(messageFormState)">
+                                                        <span>Enviar mensagem</span>
+                                                    </span>
+                                                    <span *ngIf="isFormInSuccessState(messageFormState)">
+                                                        <span>Mensagem enviada!</span>
+                                                    </span>
+                                                </button>
                                             </li>
                                         </ul>
                                     </div>

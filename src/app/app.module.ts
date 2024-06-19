@@ -28,6 +28,7 @@ import { MainRsvpComponent } from "./views/components/organisms/main-rsvp/main-r
 import { InputTextComponent } from "./views/components/atoms/input-text/input-text.component";
 
 import "./extensions/string.extension";
+import "./extensions/array.extension";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SelectSingleChoiceComponent } from "./views/components/atoms/select-single-choice/select-single-choice.component";
@@ -38,7 +39,7 @@ import { InputTextAreaComponent } from "./views/components/atoms/input-text-area
 import { GiftHeaderComponent } from "./views/components/organisms/gift-header/gift-header.component";
 import { GiftCartComponent } from "./views/components/organisms/gift-cart/gift-cart.component";
 import { GiftCheckoutPage } from "./views/pages/gifts/gift-checkout/gift-checkout.page";
-import { GiftHeroComponent } from './views/components/molecules/gift-hero/gift-hero.component';
+import { GiftHeroComponent } from "./views/components/molecules/gift-hero/gift-hero.component";
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");

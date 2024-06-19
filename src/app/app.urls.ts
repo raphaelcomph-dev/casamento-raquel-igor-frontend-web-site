@@ -41,6 +41,12 @@ export class AppUrls {
                     return `https://pix.ae?chave=f10f3e71-3ee4-4da1-825f-dab3c4056c9a&tipo=aleatoria&nome=Igor Resende Pinheiro&valor=${totalPrice}&info=Presente de Raquel e Igor&txid=PresenteCasamento`;
                 },
             },
+            POST_CHECKOUT_MESSAGE: (): string => {
+                if (environment.production) {
+                    return `${environment.apiUrl}/checkout-messages.json`;
+                }
+                return `http://localhost:3000/checkout-messages`;
+            },
         },
         RSVP: {
             POST_ANSWER: (): string => {

@@ -9,6 +9,9 @@ import { GiftService } from "../../../../services/gift.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { GiftItemDto } from "../../../../models/gift-item.dto";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { CheckoutMessageDto } from "../../../../models/checkout-message.dto";
+import { BaseValidator } from "../../../../services/validators/base.validator";
+import { EmailValidator } from "../../../../services/validators/email.validator";
 
 @Component({
     selector: "gift-checkout-page",
@@ -22,6 +25,8 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
     @ViewChild("textAreaMessage") textAreaMessage: InputTextAreaComponent;
     messageFormState = FormStateEnum.INITIAL;
     gifts: GiftItemDto[] = [];
+    PHONE_MASK = BaseValidator.MASKS.PHONE;
+    emailInputTextValidator = new EmailValidator();
 
     public get total(): number {
         return this.gifts.reduce((total, gift) => total + gift.price, 0);
@@ -47,13 +52,25 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
     }
 
     ngOnInit(): void {
-        this.giftService.getCartItems().subscribe((gifts) => {
-            this.gifts = gifts;
-        });
+        this.loadCartItems();
+        this.loadCheckoutMessageIfExists();
     }
 
     onSubmitMessage(): void {
         if (this.isFormValid()) {
+            this.messageFormState = FormStateEnum.SUBMITTED_LOADING;
+            const dto = this.extractDtoFromForm();
+
+            this.giftService.postCheckoutMessage(dto).subscribe({
+                next: (response) => {
+                    this.messageFormState = FormStateEnum.SUBMITTED_SUCCESSFULLY;
+                    this.notifier.showSuccess("Sua mensagem foi enviada com sucesso!");
+                },
+                error: (e) => {
+                    this.messageFormState = FormStateEnum.SUBMITION_FAILED;
+                    throw e;
+                },
+            });
         } else {
             this.messageFormState = FormStateEnum.SUBMITION_FAILED;
             this.notifier.showError(this.ERROR_MESSAGES.FORM_HAS_ERRORS());
@@ -68,8 +85,38 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
         let isValid = true;
         isValid = this.inputName.validate() && isValid;
         isValid = this.inputPhone.validate() && isValid;
+        isValid = this.inputEmail.validate() && isValid;
         isValid = this.textAreaMessage.validate() && isValid;
 
         return isValid;
+    }
+
+    private extractDtoFromForm(): CheckoutMessageDto {
+        return {
+            name: this.inputName.getValue(),
+            phone: this.inputPhone.getValue(),
+            email: this.inputEmail.getValue(),
+            message: this.textAreaMessage.getValue(),
+            createdDateTime: new Date(),
+        };
+    }
+
+    private loadCartItems(): void {
+        this.giftService.getCartItems().subscribe((gifts) => {
+            this.gifts = gifts;
+        });
+    }
+
+    private loadCheckoutMessageIfExists(): void {
+        setTimeout(() => {
+            const dto = this.giftService.checkoutMessage;
+            if (dto) {
+                this.inputName.changeValue(dto.name);
+                this.inputEmail.changeValue(dto.email);
+                this.inputPhone.changeValue(dto.phone);
+                this.textAreaMessage.changeValue(dto.message);
+                this.messageFormState = FormStateEnum.SUBMITTED_SUCCESSFULLY;
+            }
+        }, 500);
     }
 }

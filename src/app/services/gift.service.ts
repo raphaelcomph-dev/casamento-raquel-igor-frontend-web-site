@@ -3,6 +3,7 @@ import { GiftItemDto } from "../models/gift-item.dto";
 import { AppUrls } from "../app.urls";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { CheckoutMessageDto } from "../models/checkout-message.dto";
 
 @Injectable({
     providedIn: "root",
@@ -11,12 +12,18 @@ export class GiftService {
     private cartItems: GiftItemDto[] = [];
     private cartItemsCount = new BehaviorSubject<number>(0);
     private cartItemsSubject = new BehaviorSubject<GiftItemDto[]>([]);
+    private _checkoutMessage: CheckoutMessageDto | null = null;
 
     cartItemsCount$ = this.cartItemsCount.asObservable();
     cartItems$ = this.cartItemsSubject.asObservable();
 
+    public get checkoutMessage(): CheckoutMessageDto {
+        return this._checkoutMessage;
+    }
+
     constructor(private http: HttpClient) {
         this.loadCartIfExists();
+        this.loadCheckoutMessageIfExists();
     }
 
     findAll(): Observable<GiftItemDto[]> {
@@ -34,6 +41,11 @@ export class GiftService {
                 return convertedGifts;
             })
         );
+    }
+
+    postCheckoutMessage(dto: CheckoutMessageDto): Observable<any> {
+        localStorage.setItem("checkout-message", JSON.stringify(dto));
+        return this.http.post(AppUrls.API_ENDPOINTS.GIFTS.POST_CHECKOUT_MESSAGE(), dto);
     }
 
     addToCart(gift: GiftItemDto): void {
@@ -69,6 +81,13 @@ export class GiftService {
                 this.cartItemsCount.next(this.cartItems.length);
                 this.cartItemsSubject.next(this.cartItems);
             }
+        }
+    }
+
+    private loadCheckoutMessageIfExists(): void {
+        const checkoutMessage = localStorage.getItem("checkout-message");
+        if (checkoutMessage) {
+            this._checkoutMessage = JSON.parse(checkoutMessage);
         }
     }
 }
