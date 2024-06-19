@@ -27,19 +27,10 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
     gifts: GiftItemDto[] = [];
     PHONE_MASK = BaseValidator.MASKS.PHONE;
     emailInputTextValidator = new EmailValidator();
+    pixUrl: SafeResourceUrl;
 
     public get total(): number {
         return this.gifts.reduce((total, gift) => total + gift.price, 0);
-    }
-
-    public get pixUrl(): SafeResourceUrl {
-        const pixUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            this.URLS.API_ENDPOINTS.GIFTS.PAYMENT.PIX(this.total)
-        );
-        console.log(pixUrl);
-        pixUrl;
-
-        return pixUrl;
     }
 
     constructor(
@@ -78,6 +69,9 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
     }
 
     onPayWithPIX(content: TemplateRef<any>): void {
+        this.pixUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+            this.URLS.API_ENDPOINTS.GIFTS.PAYMENT.PIX(this.total)
+        );
         this.modalService.open(content, { fullscreen: true });
     }
 
