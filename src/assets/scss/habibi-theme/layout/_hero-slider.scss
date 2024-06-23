@@ -1063,10 +1063,12 @@
         .shape {
             position: absolute;
             left: 11px;
-            top: -15px;
             z-index: -1;
             -webkit-animation: circle 60s linear infinite;
-            animation: circle 60s linear infinite;
+            animation: circle 30s linear infinite;
+            @media (max-width: 530px) {
+                top: 5px;
+            }
         }
 
         h2 {
