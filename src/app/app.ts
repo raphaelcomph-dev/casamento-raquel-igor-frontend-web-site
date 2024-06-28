@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import packageJson from "../../package.json";
 
 @Component({
     selector: "app-root",
@@ -6,5 +7,9 @@ import { Component } from "@angular/core";
     styleUrls: [],
 })
 export class AppComponent {
-    title = "casamento-raquel-igor-frontend-web-site";
+    public version: string = packageJson.version;
+
+    ngOnInit(): void {
+        console.log(`Casamento Raquel & Igor - Frontend - Web Site v${this.version}`);
+    }
 }
