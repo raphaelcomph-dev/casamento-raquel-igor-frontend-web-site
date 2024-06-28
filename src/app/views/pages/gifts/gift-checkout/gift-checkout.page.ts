@@ -91,6 +91,7 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
             phone: this.inputPhone.getValue(),
             email: this.inputEmail.getValue(),
             message: this.textAreaMessage.getValue(),
+            gifts: this.gifts,
             createdDateTime: new Date(),
         };
     }
