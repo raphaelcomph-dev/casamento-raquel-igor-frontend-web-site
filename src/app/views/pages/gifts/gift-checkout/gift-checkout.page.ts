@@ -1,33 +1,35 @@
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { BaseView } from "../../../base.view";
-import { BaseFormView, FormStateEnum } from "../../../base-form.view";
-import { InputTextAreaComponent } from "../../../components/atoms/input-text-area/input-text-area.component";
-import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
-import { NotificationService } from "../../../../services/notification.service";
-import { RsvpService } from "../../../../services/rsvp.service";
-import { GiftService } from "../../../../services/gift.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { GiftItemDto } from "../../../../models/gift-item.dto";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { NgbModal, NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 import { CheckoutMessageDto } from "../../../../models/checkout-message.dto";
+import { GiftItemDto } from "../../../../models/gift-item.dto";
+import { GiftService } from "../../../../services/gift.service";
+import { NotificationService } from "../../../../services/notification.service";
 import { BaseValidator } from "../../../../services/validators/base.validator";
 import { EmailValidator } from "../../../../services/validators/email.validator";
+import { FormStateEnum } from "../../../base-form.view";
+import { InputTextAreaComponent } from "../../../components/atoms/input-text-area/input-text-area.component";
+import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
+import { BasePageView } from "../../base-page.view";
+import { BaseFormPageView } from "../../base-form-page.view";
 
 @Component({
     selector: "gift-checkout-page",
     templateUrl: "./gift-checkout.page.html",
     styles: ``,
 })
-export class GiftCheckoutPage extends BaseFormView implements OnInit {
+export class GiftCheckoutPage extends BaseFormPageView implements OnInit {
     @ViewChild("inputName") inputName: InputTextComponent;
     @ViewChild("inputPhone") inputPhone: InputTextComponent;
     @ViewChild("inputEmail") inputEmail: InputTextComponent;
     @ViewChild("textAreaMessage") textAreaMessage: InputTextAreaComponent;
+    @ViewChild("modalLoading") modalLoading;
     messageFormState = FormStateEnum.INITIAL;
     gifts: GiftItemDto[] = [];
     PHONE_MASK = BaseValidator.MASKS.PHONE;
     emailInputTextValidator = new EmailValidator();
     pixUrl: SafeResourceUrl;
+    checkoutLink: string;
 
     public get total(): number {
         return this.gifts.reduce((total, gift) => total + gift.price, 0);
@@ -68,11 +70,32 @@ export class GiftCheckoutPage extends BaseFormView implements OnInit {
         }
     }
 
-    onPayWithPIX(content: TemplateRef<any>): void {
-        this.pixUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            this.URLS.API_ENDPOINTS.GIFTS.PAYMENT.PIX(this.total)
-        );
-        this.modalService.open(content, { fullscreen: true });
+    onGoToPaymentPage(): void {
+        const startTime = Date.now();
+
+        this.modalService.open(this.modalLoading, {
+            centered: true,
+        });
+        this.giftService.postCheckoutWithCreditCard(this.gifts).subscribe({
+            next: (response) => {
+                const elapsedTime = Date.now() - startTime;
+                const remainingTimeToShowForceRedirectCheckoutUrl = Math.max(5000 - elapsedTime, 0);
+                const remainingTimeToCloseModal = Math.max(15000 - elapsedTime, 0);
+                window.open(response.checkoutUrl, "_blank").focus();
+
+                setTimeout(() => {
+                    this.checkoutLink = response.checkoutUrl;
+                }, remainingTimeToShowForceRedirectCheckoutUrl);
+
+                setTimeout(() => {
+                    this.modalService.dismissAll();
+                    this.checkoutLink = null;
+                }, remainingTimeToCloseModal);
+            },
+            error: (e) => {
+                throw e;
+            },
+        });
     }
 
     private isFormValid(): boolean {

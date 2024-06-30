@@ -10,6 +10,8 @@ import { GiftService } from "../../../../services/gift.service";
     styles: ``,
 })
 export class GiftHeaderComponent extends BaseView implements OnInit {
+    @Input() returnTo: "main-page" | "gift-list" = "gift-list";
+    @ViewChild("content") cartOffcanvas;
     isBellowHeader = false;
     isSticky = false;
     cartCount = 0;
@@ -25,7 +27,6 @@ export class GiftHeaderComponent extends BaseView implements OnInit {
             link: AppUrls.PATHS.GIFTS.LIST.ABSOLUTE_PATH(),
         },
     ];
-    @Input() returnTo: "main-page" | "gift-list" = "gift-list";
 
     public get returnToText(): string {
         return GiftHeaderComponent.returnToOptions.find((option) => option.value === this.returnTo)?.text;
@@ -40,8 +41,11 @@ export class GiftHeaderComponent extends BaseView implements OnInit {
 
     ngOnInit(): void {
         this.scrollTo();
-        this.giftService.cartItemsCount$.subscribe((count) => {
-            this.cartCount = count;
+        this.giftService.cartItemsCount$.subscribe((newCount) => {
+            this.cartCount = newCount;
+        });
+        this.giftService.addNewItemsToCart$.subscribe(() => {
+            this.showCart();
         });
     }
 
@@ -64,8 +68,10 @@ export class GiftHeaderComponent extends BaseView implements OnInit {
         }
     }
 
-    showCart(content: TemplateRef<any>) {
-        this.offcanvasService.open(content, { position: "end" });
+    showCart() {
+        if (!this.offcanvasService.hasOpenOffcanvas()) {
+            this.offcanvasService.open(this.cartOffcanvas, { position: "end" });
+        }
     }
 
     onGoToCheckoutPage(): void {}

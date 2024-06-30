@@ -8,7 +8,6 @@ import packageJson from "../../package.json";
 })
 export class AppComponent {
     public version: string = packageJson.version;
-
     ngOnInit(): void {
         console.log(`Casamento Raquel & Igor - Frontend - Web Site v${this.version}`);
     }

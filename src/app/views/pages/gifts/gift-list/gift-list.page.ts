@@ -1,21 +1,23 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { BaseView } from "../../../base.view";
-import { GiftService } from "../../../../services/gift.service";
+import * as _ from "lodash";
 import { GiftItemDto } from "../../../../models/gift-item.dto";
+import { GiftService } from "../../../../services/gift.service";
+import { NumberInputTextModifier } from "../../../components/atoms/input-text/input-text-modifiers";
+import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
 import {
     SelectOption,
     SelectSingleChoiceComponent,
 } from "../../../components/atoms/select-single-choice/select-single-choice.component";
-import * as _ from "lodash";
-import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
-import { NumberInputTextModifier } from "../../../components/atoms/input-text/input-text-modifiers";
+import { BasePageView } from "../../base-page.view";
+import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
+import { NotificationService } from "../../../../services/notification.service";
 
 @Component({
     selector: "gift-list-page",
     templateUrl: "./gift-list.page.html",
     styles: ``,
 })
-export class GiftListPage extends BaseView implements OnInit {
+export class GiftListPage extends BasePageView implements OnInit {
     @ViewChild("selectSortBy") selectSortBy: SelectSingleChoiceComponent;
     @ViewChild("inputFilterByPriceMinimum") inputFilterByPriceMinimum: InputTextComponent;
     @ViewChild("inputFilterByPriceMaximum") inputFilterByPriceMaximum: InputTextComponent;
@@ -37,12 +39,12 @@ export class GiftListPage extends BaseView implements OnInit {
             .filter((value, index, self) => self.indexOf(value) === index);
     }
 
-    constructor(private readonly giftService: GiftService) {
+    constructor(private readonly giftService: GiftService, private readonly notifier: NotificationService) {
         super();
     }
 
     ngOnInit(): void {
-        this.giftService.findAll().subscribe((gifts) => {
+        this.giftService.getFindAll().subscribe((gifts) => {
             this.gifts = gifts;
             this.applySortAndFilterToList();
         });
@@ -69,7 +71,11 @@ export class GiftListPage extends BaseView implements OnInit {
 
     onAddToCart(giftId: string): void {
         const gift = this.gifts.find((gift) => gift.id === giftId);
-        this.giftService.addToCart(gift);
+        const added = this.giftService.addToCart(gift);
+
+        if (!added) {
+            this.notifier.showError("Você já adicionou este presente no carrinho.");
+        }
     }
 
     private applySortAndFilterToList(): void {

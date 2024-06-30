@@ -95,21 +95,12 @@
                                     <span class="w-75">{{gift.name}}</span><span>{{formatCurrency(gift.price)}}</span>
                                 </li>
                                 <li class="o-bottom">Valor total:<span>{{formatCurrency(total)}}</span></li>
-                                <li class="o-bottom pb-1">
+                                <li class="o-bottom mt-1 mb-3">
                                     <a
                                         role="button"
                                         class="view-cart-btn px-3 w-100 text-center"
-                                        (click)="onPayWithPIX(content)"
-                                        >Pagar via PIX</a
-                                    >
-                                </li>
-                                <li class="pt-1">
-                                    <a
-                                        role="button"
-                                        class="view-cart-btn px-3 w-100 text-center"
-                                        target="_blank"
-                                        href="https://pag.ae/7-ERGws9u"
-                                        >Pagar com Cartão</a
+                                        (click)="onGoToPaymentPage()"
+                                        >Efetuar pagamento</a
                                     >
                                 </li>
                             </ul>
@@ -121,11 +112,26 @@
     </div>
 </div>
 
-<ng-template #content let-modal>
+<ng-template #modalLoading let-modal>
     <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
-    <iframe [src]="pixUrl" frameborder="0" height="100%"></iframe>
+
+    <div class="modal-body text-center p-md-5">
+        <div class="mb-5">
+            <div class="text-center">
+                <h1 class="text-muted display-4">Aguarde</h1>
+            </div>
+        </div>
+
+        <div class="mb-2 small">
+            <p>Em alguns segundos, você será redirecionado para efetuar o pagamento numa página do Mercado Pago.</p>
+            <p *ngIf="checkoutLink">
+                Caso você não seja redirecionado, clique no link abaixo para tentar novamente.
+                <a [href]="checkoutLink" target="_blank">Ir para o Mercado Pago</a>
+            </p>
+        </div>
+    </div>
 </ng-template>
 
 <app-footer></app-footer>
