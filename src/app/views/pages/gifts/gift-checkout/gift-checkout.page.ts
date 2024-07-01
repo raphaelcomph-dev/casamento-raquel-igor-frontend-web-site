@@ -73,26 +73,26 @@ export class GiftCheckoutPage extends BaseFormPageView implements OnInit {
     onGoToPaymentPage(): void {
         const startTime = Date.now();
 
+        var checkoutRedirectPage = window.open(
+            `${window.location.origin}${this.URLS.PATHS.CHECKOUT_REDIRECT(false)}`,
+            "_blank"
+        );
         this.modalService.open(this.modalLoading, {
             centered: true,
         });
         this.giftService.postCheckoutWithCreditCard(this.gifts).subscribe({
             next: (response) => {
+                this.checkoutLink = response.checkoutUrl;
                 const elapsedTime = Date.now() - startTime;
                 const remainingTimeToShowForceRedirectCheckoutUrl = Math.max(5000 - elapsedTime, 0);
-                const remainingTimeToCloseModal = Math.max(15000 - elapsedTime, 0);
-                window.open(response.checkoutUrl, "_blank").focus();
 
                 setTimeout(() => {
-                    this.checkoutLink = response.checkoutUrl;
-                }, remainingTimeToShowForceRedirectCheckoutUrl);
-
-                setTimeout(() => {
+                    checkoutRedirectPage.location.href = response.checkoutUrl;
                     this.modalService.dismissAll();
-                    this.checkoutLink = null;
-                }, remainingTimeToCloseModal);
+                }, remainingTimeToShowForceRedirectCheckoutUrl);
             },
             error: (e) => {
+                checkoutRedirectPage.close();
                 throw e;
             },
         });

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { GiftItemDto } from "../models/gift-item.dto";
 import { AppUrls } from "../app.urls";
-import { BehaviorSubject, Observable, Subject, map } from "rxjs";
+import { BehaviorSubject, Observable, Subject, map, tap } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { CheckoutMessageDto } from "../models/checkout-message.dto";
 
@@ -51,7 +51,11 @@ export class GiftService {
     }
 
     postCheckoutWithCreditCard(dtos: GiftItemDto[]): Observable<any> {
-        return this.http.post<any>(AppUrls.API_ENDPOINTS.GIFTS.PAYMENT.CREDIT_CARD(), dtos);
+        return this.http.post<any>(AppUrls.API_ENDPOINTS.GIFTS.PAYMENT.CREDIT_CARD(), dtos).pipe(
+            tap((response) => {
+                localStorage.setItem("checkout-url", response.checkoutUrl);
+            })
+        );
     }
 
     addToCart(gift: GiftItemDto): boolean {

@@ -22,6 +22,7 @@ export class AppUrls {
                 RELATIVE_PATH: () => `${AppUrls.PATHS.GIFTS.RELATIVE_PATH()}/pagamento`,
             },
         },
+        CHECKOUT_REDIRECT: (relative: boolean = true) => `${relative ? "" : "/"}pagamento/redirecionando`,
     };
 
     public static readonly EXTERNAL_URLS = {};

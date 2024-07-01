@@ -40,6 +40,7 @@ import { GiftHeaderComponent } from "./views/components/organisms/gift-header/gi
 import { GiftCartComponent } from "./views/components/organisms/gift-cart/gift-cart.component";
 import { GiftCheckoutPage } from "./views/pages/gifts/gift-checkout/gift-checkout.page";
 import { GiftHeroComponent } from "./views/components/molecules/gift-hero/gift-hero.component";
+import { CheckoutRedirectPage } from "./views/pages/checkout-redirect/checkout-redirect.page";
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -68,6 +69,7 @@ registerLocaleData(localePt);
         GiftCartComponent,
         GiftCheckoutPage,
         GiftHeroComponent,
+        CheckoutRedirectPage,
     ],
     imports: [
         BrowserAnimationsModule,
