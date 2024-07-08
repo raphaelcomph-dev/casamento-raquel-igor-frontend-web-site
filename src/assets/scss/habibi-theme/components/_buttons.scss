@@ -1,135 +1,125 @@
 .theme-btn,
 .theme-btn-s3,
 .theme-btn-s4 {
-	background: $theme-primary-color;
-	color: $white;
-	display: inline-block;
-	font-weight: 500;
-	padding: 15px 45px;
-	border: 0;
-	text-transform: uppercase;
-	-webkit-backface-visibility: hidden;
-	z-index: 1;
-	position: relative;
-	font-size: 18px;
-	font-size: calc-rem-value(18);
-	transition: all .3s;
-	
-	&.theme-btn-s3{
-		background: $white;
-		color: $theme-primary-color;
+    background: $theme-primary-color;
+    color: $white;
+    display: inline-block;
+    font-weight: 500;
+    padding: 15px 45px;
+    border: 0;
+    text-transform: uppercase;
+    -webkit-backface-visibility: hidden;
+    z-index: 1;
+    position: relative;
+    font-size: 18px;
+    font-size: calc-rem-value(18);
+    transition: all 0.3s;
 
-		&:after {
-			border: 1px solid $white;
-		}
-	} 
+    &.theme-btn-s3 {
+        background: $white;
+        color: $theme-primary-color;
 
-	&.theme-btn-s4{
-		background: $theme-primary-color;
-		color: $white;
+        border: 1px solid $theme-primary-color;
+    }
 
-		&:after {
-			border: 1px solid $theme-primary-color;
-		}
-	}
+    &.theme-btn-s4 {
+        background: $theme-primary-color;
+        color: $white;
 
-	&:hover,
-	&:focus,
-	&:active {
-		background: darken($theme-primary-color, 8);
-		color: $white;
-	}
+        &:after {
+            border: 1px solid $theme-primary-color;
+        }
+    }
 
-	&:hover:after {
-		opacity: 1;
-	}
+    &:hover,
+    &:focus,
+    &:active {
+        background: darken($theme-primary-color, 8);
+        color: $white;
+    }
 
-	@include media-query(991px) {
-		font-size: 18px;
-		font-size: calc-rem-value(18);
-	}
+    &:hover:after {
+        opacity: 1;
+    }
 
-	@include media-query(767px) {
-		padding: 12px 18px;
-		font-size: 14px;
-	}
+    @include media-query(991px) {
+        font-size: 18px;
+        font-size: calc-rem-value(18);
+    }
+
+    @include media-query(767px) {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
 }
 
 .theme-btn-s2 {
-	background: $theme-primary-color-s4;
-	color: $dark-gray;
-	display: inline-block;
-	font-weight: 500;
-	padding: 15px 45px;
-	border: 0;
-	text-transform: capitalize;
-	-webkit-backface-visibility: hidden;
-	z-index: 1;
-	position: relative;
-	font-size: 18px;
-	font-size: calc-rem-value(18);
-	transition: all .3s;
+    background: $theme-primary-color-s4;
+    color: $dark-gray;
+    display: inline-block;
+    font-weight: 500;
+    padding: 15px 45px;
+    border: 0;
+    text-transform: capitalize;
+    -webkit-backface-visibility: hidden;
+    z-index: 1;
+    position: relative;
+    font-size: 18px;
+    font-size: calc-rem-value(18);
+    transition: all 0.3s;
 
-	z-index: 1;
-	position: relative;
+    z-index: 1;
+    position: relative;
 
-	@include media-query(991px) {
-		font-size: 14px;
-		font-size: calc-rem-value(14);
-	}
+    @include media-query(991px) {
+        font-size: 14px;
+        font-size: calc-rem-value(14);
+    }
 
-	&:hover,
-	&:focus,
-	&:active {
-		background: $theme-primary-color-s2;
-		color: $dark-gray;
-	}
+    &:hover,
+    &:focus,
+    &:active {
+        background: $theme-primary-color-s2;
+        color: $dark-gray;
+    }
 
-	@include media-query(767px) {
-		padding: 12px 18px;
-		font-size: 13px;
-	}
+    @include media-query(767px) {
+        padding: 12px 18px;
+        font-size: 13px;
+    }
 }
 
-
-.theme-btn-s4{
-	&:hover{
-		background:darken($theme-primary-color, 6%);
-		&:after {
-			border: 1px solid darken($theme-primary-color, 6%);
-		}
-	}
-
+.theme-btn-s4 {
+    &:hover {
+        background: darken($theme-primary-color, 6%);
+        &:after {
+            border: 1px solid darken($theme-primary-color, 6%);
+        }
+    }
 }
-
-
 
 .view-cart-btn {
-	@extend .theme-btn;
-	display: block;
-	margin-top: 15px;
-	border-radius: 5px;
-	padding: 10px 45px;
-	background: $theme-primary-color;
-	color: $white;
-	text-transform: capitalize;
+    @extend .theme-btn;
+    display: block;
+    border-radius: 5px;
+    padding: 10px 45px;
+    background: $theme-primary-color;
+    color: $white;
+    text-transform: capitalize;
 
-	
-	&:after{
-		display: none;
-	}
-	&:hover{
-		background-color: darken($theme-primary-color, 8%);
-	}
+    &:after {
+        display: none;
+    }
+    &:hover {
+        background-color: darken($theme-primary-color, 8%);
+    }
 
-	&.s1{
-		background: transparentize($theme-primary-color, .8);
-		color: $dark-gray;
+    &.s1 {
+        background: transparentize($theme-primary-color, 0.8);
+        color: $dark-gray;
 
-		&:hover{
-			background-color: darken(#ddd, 8%);
-		}
-	}
-
+        &:hover {
+            background-color: darken(#ddd, 8%);
+        }
+    }
 }
-

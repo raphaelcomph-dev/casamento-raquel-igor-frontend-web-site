@@ -1,0 +1,68 @@
+<div class="auth-page d-flex align-items-center bg-dark-subtle">
+    <div class="auth-wrapper mx-auto my-sm-5 py-5 shadow-lg bg-white">
+        <div class="auth-content mx-auto">
+            <div class="mb-4">
+                <h1 class="mb-2 text-center display-3">
+                    <a class="navbar-brand me-0 text-center" href="index.html">
+                        <span class="text-primary">Raquel & Igor</span>
+                    </a>
+                </h1>
+            </div>
+
+            <div>
+                <div class="mb-4">
+                    <div class="text-center">
+                        <h2 class="text-muted">Bem-vindos a área administrativa</h2>
+                    </div>
+                </div>
+
+                <div class="text-start mx-auto position-relative bg-white z-1">
+                    <form class="">
+                        <div class="mb-3">
+                            <app-input-text
+                                #inputName
+                                placeholder="Informe sua senha"
+                                fieldName="Senha"
+                                type="password"
+                                [required]="true"
+                            ></app-input-text>
+                        </div>
+
+                        <div class="d-grid gap-2 mx-auto">
+                            <button class="btn btn-primary text-white" type="submit">Prosseguir</button>
+                        </div>
+
+                        <div class="my-4 text-center">
+                            <div class="form-check d-inline-block">
+                                <div class="checkbox small">
+                                    <input type="checkbox" id="checkbox1" class="form-check-input" />
+                                    <label for="checkbox1">Lembrar de mim</label>
+                                    <i
+                                        class="fa-solid fa-circle-info ms-2"
+                                        role="button"
+                                        [ngbPopover]="popContent"
+                                        triggers="mouseenter:mouseleave"
+                                    ></i>
+                                    <ng-template #popContent>
+                                        A sessão ficará salva neste navegador. Não será mais necessário digitar a senha
+                                        para entrar.
+                                    </ng-template>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr class="my-4" />
+
+                    <div class="text-center">
+                        <div class="small">
+                            <a [routerLink]="URLS.PATHS.ROOT.ABSOLUTE_PATH()">
+                                <i class="fa-solid fa-arrow-left me-2"></i> Voltar ao site principal
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

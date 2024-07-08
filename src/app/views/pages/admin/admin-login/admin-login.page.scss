@@ -1,0 +1,17 @@
+.auth-page {
+    height: 100vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.auth-wrapper {
+    min-width: 512px;
+    // max-width: 512px;
+    overflow-y: scroll;
+    @media (max-width: 576px) {
+        height: 100vh;
+    }
+}
+.auth-content {
+    max-width: 320px;
+}

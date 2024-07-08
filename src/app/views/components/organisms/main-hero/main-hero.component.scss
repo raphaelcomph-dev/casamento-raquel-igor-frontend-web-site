@@ -1,0 +1,29 @@
+#clock {
+    @media (max-width: 1400px) {
+        .time {
+            font-size: xx-large !important;
+        }
+
+        span {
+            font-size: larger !important;
+        }
+    }
+    @media (max-width: 1200px) {
+        .time {
+            font-size: x-large !important;
+        }
+
+        span {
+            font-size: large !important;
+        }
+    }
+    @media (max-width: 575px) {
+        .time {
+            font-size: x-large !important;
+        }
+
+        span {
+            font-size: larger !important;
+        }
+    }
+}

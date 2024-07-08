@@ -23,6 +23,9 @@ export class AppUrls {
             },
         },
         CHECKOUT_REDIRECT: (relative: boolean = true) => `${relative ? "" : "/"}pagamento/redirecionando`,
+        ADMIN: {
+            LOGIN: (relative: boolean = true) => `${relative ? "" : "/"}admin/login`,
+        },
     };
 
     public static readonly EXTERNAL_URLS = {};

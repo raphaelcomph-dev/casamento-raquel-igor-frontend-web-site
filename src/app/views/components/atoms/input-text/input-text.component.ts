@@ -3,7 +3,7 @@ import { BaseInputTextModifier } from "./input-text-modifiers";
 import { BaseValidator } from "../../../../services/validators/base.validator";
 import { BaseInputComponent } from "../base-input.component";
 
-type InputTypes = "email" | "text" | "tel";
+type InputTypes = "email" | "text" | "tel" | "password";
 
 @Component({
     selector: "app-input-text",
@@ -28,6 +28,7 @@ export class InputTextComponent extends BaseInputComponent implements OnInit {
     protected isValidated: boolean = false;
     protected valid: boolean = true;
     protected errorMessage: string = "";
+    protected showPassword: boolean = false;
 
     ngOnInit(): void {
         this.setInputId(this.label);

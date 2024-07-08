@@ -6,6 +6,7 @@ import { BaseView } from "../../../base.view";
 @Component({
     selector: "app-main-hero",
     templateUrl: "./main-hero.component.html",
+    styleUrl: "./main-hero.component.scss",
 })
 export class MainHeroComponent extends BaseView implements OnInit {
     private readonly ONE_SECOND_IN_MILISEC = 1000;
