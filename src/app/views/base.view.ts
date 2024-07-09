@@ -46,6 +46,13 @@ export class BaseView {
         return `-`;
     }
 
+    formatDateTime(value: Date, format: string = "DD/MM/YYYY HH:mm"): string {
+        if (value != null && value != undefined) {
+            return dayjs(value).locale(this.locale).format(format);
+        }
+        return `-`;
+    }
+
     formatDocument(value: string, format: "CNPJ" | "CPF"): string {
         if (value != null && value != undefined) {
             if (format == "CNPJ") {

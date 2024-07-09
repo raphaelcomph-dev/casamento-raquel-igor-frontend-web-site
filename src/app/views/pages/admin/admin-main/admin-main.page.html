@@ -1,0 +1,369 @@
+<div class="wrapper bg-color-s3 pb-5 vh-100 overflow-y-scroll">
+    <div class="header bg-white">
+        <div class="container">
+            <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4">
+                <div class="col-3 mb-2 mb-md-0">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" role="button">Raquel & Igor</a>
+                    </div>
+                </div>
+
+                <div class="col-3 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2">Sair</button>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <section class="">
+                <div class="row">
+                    <div class="col-sm-6 col-xl-4 mb-3">
+                        <div class="card h-lg-100 border-0">
+                            <div class="card-body d-flex justify-content-between align-items-start flex-column">
+                                <div class="p-3 w-100">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="font-18 mb-1 small">Convidados confirmados</p>
+                                            <h1 class="text-primary fw-bold my-0">{{guestQty}}</h1>
+                                        </div>
+                                        <div class="text-end">
+                                            <i class="fa-solid fa-users fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4 mb-3">
+                        <div class="card h-lg-100 border-0">
+                            <div class="card-body d-flex justify-content-between align-items-start flex-column">
+                                <div class="p-3 w-100">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="font-18 mb-1 small">Valor total em presentes</p>
+                                            <h1 class="text-primary fw-bold my-0">
+                                                {{formatCurrency(giftsTotalPrice)}}
+                                            </h1>
+                                        </div>
+                                        <div class="text-end">
+                                            <i class="fa-solid fa-hand-holding-dollar fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4 mb-3">
+                        <div class="card h-lg-100 border-0">
+                            <div class="card-body d-flex justify-content-between align-items-start flex-column">
+                                <div class="p-3 w-100">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <p class="font-18 mb-1 small">Qtd de presentes comprados</p>
+                                            <h1 class="text-primary fw-bold my-0">{{giftsTotalQty}}</h1>
+                                        </div>
+                                        <div class="text-end">
+                                            <i class="fa-solid fa-gifts fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs" role="tablist">
+                    <li class="nav-item w-50 text-center bg-body-tertiary" role="presentation" [ngbNavItem]="1">
+                        <a class="nav-link" id="home-tab" role="tab" ngbNavLink> Convidados </a>
+                        <ng-template ngbNavContent>
+                            <div class="table-responsive">
+                                <table class="table table-lg">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nome</th>
+                                            <th>Resposta</th>
+                                            <th>Levarão qts pessoas</th>
+                                            <th>Data/hora da resposta</th>
+                                            <th style="min-width: 130px"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let answer of rsvpAnswers; let i = index">
+                                            <td class="text-bold-500">{{i+1}}.</td>
+                                            <td class="text-bold-500">{{answer.name}}</td>
+                                            <td>
+                                                <span
+                                                    class="badge rounded-pill text-bg-success text-white"
+                                                    *ngIf="answer.answer"
+                                                >
+                                                    Sim, estarei lá!
+                                                </span>
+                                                <span
+                                                    class="badge rounded-pill text-bg-danger text-white"
+                                                    *ngIf="!answer.answer"
+                                                >
+                                                    Não poderei comparecer
+                                                </span>
+                                            </td>
+                                            <td class="text-bold-500">{{answer.guestQty}}</td>
+                                            <td class="text-bold-500">{{formatDateTime(answer.answerDateTime)}}</td>
+                                            <td class="">
+                                                <a
+                                                    role="button"
+                                                    class="btn btn-outline-primary me-2 w-100"
+                                                    style="max-width: 48px"
+                                                    (click)="onShowEditModalRsvpAnswer(answer.id)"
+                                                >
+                                                    <i class="fa-solid fa-user-pen fa-lg"></i>
+                                                </a>
+                                                <a
+                                                    role="button"
+                                                    class="btn btn-outline-primary me-2 w-100"
+                                                    style="max-width: 48px"
+                                                    (click)="onShowDeleteModalRsvpAnswer(answer.id)"
+                                                >
+                                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li class="nav-item w-50 text-center bg-body-tertiary" role="presentation" [ngbNavItem]="2">
+                        <a class="nav-link" id="profile-tab" role="tab" ngbNavLink>Presentes</a>
+                        <ng-template ngbNavContent>
+                            <div class="table-responsive">
+                                <table class="table table-lg">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nome</th>
+                                            <th>Telefone/email</th>
+                                            <th>Presentes</th>
+                                            <th>Valor total do carrinho</th>
+                                            <th>Data/hora da compra</th>
+                                            <th>Mensagem p/ os noivos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="small">
+                                        <tr *ngFor="let checkoutMessage of checkoutMessages; let i = index">
+                                            <td class="text-bold-500">{{i+1}}.</td>
+                                            <td class="text-bold-500">{{checkoutMessage.name}}</td>
+                                            <td class="text-bold-500">
+                                                <span class="text-nowrap">{{checkoutMessage.phone}}</span>/
+                                                <span class="text-nowrap">{{checkoutMessage.email}}</span>
+                                            </td>
+                                            <td class="text-bold-500">{{checkoutMessage.giftsNames()}}</td>
+                                            <td class="text-bold-500">
+                                                {{formatCurrency(checkoutMessage.giftsTotalPrice())}}
+                                            </td>
+                                            <td class="text-bold-500">
+                                                {{formatDateTime(checkoutMessage.createdDateTime)}}
+                                            </td>
+                                            <td class="text-bold-500 text-center">
+                                                <a
+                                                    role="button"
+                                                    class="btn btn-outline-primary me-2"
+                                                    (click)="onShowModalCheckoutMessage(checkoutMessage.id)"
+                                                >
+                                                    <i class="fa-solid fa-envelope-open-text fa-lg"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+
+                <div class="tab-content bg-white p-4" [ngbNavOutlet]="nav"></div>
+
+                <div class="tab-content bg-white p-4 d-none" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="table-responsive">
+                            <table class="table table-lg">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Resposta</th>
+                                        <th>Levarão qts pessoas</th>
+                                        <th>Data/hora da resposta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-bold-500">1.</td>
+                                        <td class="text-bold-500">Michael Right</td>
+                                        <td>
+                                            <span class="badge rounded-pill text-bg-success text-white"
+                                                >Sim, estarei lá!</span
+                                            >
+                                        </td>
+                                        <td class="text-bold-500">3</td>
+                                        <td class="text-bold-500">30/06/2024 às 19:18</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">2.</td>
+                                        <td class="text-bold-500">Morgan Vanblum</td>
+                                        <td>$13/hr</td>
+                                        <td class="text-bold-500">Graphic concepts</td>
+                                        <td class="text-bold-500">Graphic concepts</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">3.</td>
+                                        <td class="text-bold-500">Tiffani Blogz</td>
+                                        <td>$15/hr</td>
+                                        <td class="text-bold-500">Animation</td>
+                                        <td class="text-bold-500">Animation</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">4.</td>
+                                        <td class="text-bold-500">Ashley Boul</td>
+                                        <td>$15/hr</td>
+                                        <td class="text-bold-500">Animation</td>
+                                        <td class="text-bold-500">Animation</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-bold-500">5.</td>
+                                        <td class="text-bold-500">Mikkey Mice</td>
+                                        <td>$15/hr</td>
+                                        <td class="text-bold-500">Animation</td>
+                                        <td class="text-bold-500">Animation</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce non sapien sit
+                        amet magna dapibus ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a
+                        mauris ex. Ut finibus risus sed massa mattis porta. Aliquam sagittis massa et purus efficitur
+                        ultricies. Integer pretium dolor at sapien laoreet ultricies. Fusce congue et lorem id
+                        convallis. Nulla volutpat tellus nec molestie finibus. In nec odio tincidunt eros finibus
+                        ullamcorper. Ut sodales, dui nec posuere finibus, nisl sem aliquam metus, eu accumsan lacus
+                        felis at odio. Sed lacus quam, convallis quis condimentum ut, accumsan congue massa.
+                        Pellentesque et quam vel massa pretium ullamcorper vitae eu tortor.
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <p class="mt-2">
+                            Duis ultrices purus non eros fermentum hendrerit. Aenean ornare interdum viverra. Sed ut
+                            odio velit. Aenean eu diam dictum nibh rhoncus mattis quis ac risus. Vivamus eu congue
+                            ipsum. Maecenas id sollicitudin ex. Cras in ex vestibulum, posuere orci at, sollicitudin
+                            purus. Morbi mollis elementum enim, in cursus sem placerat ut.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalCheckoutMessage let-modal>
+    <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body text-center p-md-4">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+                <p>&#8220;{{selectedCheckoutMessage.message}}&#8221;</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                <cite class="small">{{selectedCheckoutMessage.name}}</cite>
+            </figcaption>
+        </figure>
+    </div>
+</ng-template>
+
+<ng-template #modalDeleteRsvp let-modal>
+    <div class="modal-header bg-danger">
+        <span class="modal-title text-white fs-5" id="modalTitleId">Excluir confirmação de presença</span>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="">
+            <p>
+                Você tem certeza que deseja a resposta de
+                <span class="fw-bolder">"{{ selectedRsvpAnswer.name }}"</span>?
+                <br />
+                <br />
+                Esta operação não poderá ser desfeita.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer d-block">
+        <div class="col-sm-12">
+            <div class="d-grid gap-2 d-md-block float-md-end">
+                <button
+                    class="btn btn-outline-danger icon icon-right px-4 me-2"
+                    type="button"
+                    (click)="onDeleteRsvpAnswer()"
+                >
+                    Excluir
+                </button>
+                <button
+                    class="btn btn-primary text-white icon icon-right px-4"
+                    type="button"
+                    (click)="modal.dismiss('Cross click')"
+                >
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #modalEditRsvp let-modal>
+    <div class="modal-header">
+        <span class="modal-title fs-5" id="modalTitleId">Editar confirmação de presença</span>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body text-center p-md-4">
+        <form>
+            <div class="mb-4">
+                <app-input-text
+                    #inputName
+                    placeholder="Nome ou nome da família"
+                    [required]="true"
+                    [initialValue]="selectedRsvpAnswer.name"
+                ></app-input-text>
+            </div>
+            <div class="mb-4">
+                <app-input-radiogroup
+                    #radioRsvpAnswer
+                    [options]="rsvpAnswerInputOptions"
+                    [required]="true"
+                    [initialCheckedOption]="selectedRsvpAnswer.answer.toString()"
+                ></app-input-radiogroup>
+            </div>
+            <div class="mb-4">
+                <app-select-single-choice
+                    #selectGuestQty
+                    placeholder="Quantas pessoas irão com você?"
+                    [options]="rsvpQtyGuestSelectOptions"
+                    [required]="true"
+                    [initialSelectedValue]="selectedRsvpAnswer.guestQty.toString()"
+                >
+                </app-select-single-choice>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-primary" (click)="modal.dismiss('Cross click')">
+            <span>Cancelar</span>
+        </button>
+        <button type="submit" class="btn btn-primary text-white" (click)="onSaveRsvpAnswer()">
+            <span>Salvar resposta</span>
+        </button>
+    </div>
+</ng-template>

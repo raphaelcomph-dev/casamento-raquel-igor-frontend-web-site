@@ -24,6 +24,7 @@ export class AppUrls {
         },
         CHECKOUT_REDIRECT: (relative: boolean = true) => `${relative ? "" : "/"}pagamento/redirecionando`,
         ADMIN: {
+            MAIN: (relative: boolean = true) => `${relative ? "" : "/"}admin`,
             LOGIN: (relative: boolean = true) => `${relative ? "" : "/"}admin/login`,
         },
     };
@@ -44,7 +45,7 @@ export class AppUrls {
                     return `${environment.apiUrl.backend}/checkout`;
                 },
             },
-            POST_CHECKOUT_MESSAGE: (): string => {
+            CHECKOUT_MESSAGE: (): string => {
                 if (environment.production) {
                     return `${environment.apiUrl.firebaseDb}/checkout-messages.json`;
                 }
@@ -52,7 +53,7 @@ export class AppUrls {
             },
         },
         RSVP: {
-            POST_ANSWER: (): string => {
+            ANSWERS: (): string => {
                 if (environment.production) {
                     return `${environment.apiUrl.firebaseDb}/rsvp.json`;
                 }

@@ -42,6 +42,7 @@ import { GiftCheckoutPage } from "./views/pages/gifts/gift-checkout/gift-checkou
 import { GiftHeroComponent } from "./views/components/molecules/gift-hero/gift-hero.component";
 import { CheckoutRedirectPage } from "./views/pages/checkout-redirect/checkout-redirect.page";
 import { AdminLoginPage } from "./views/pages/admin/admin-login/admin-login.page";
+import { AdminMainPage } from "./views/pages/admin/admin-main/admin-main.page";
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -72,6 +73,7 @@ registerLocaleData(localePt);
         GiftHeroComponent,
         CheckoutRedirectPage,
         AdminLoginPage,
+        AdminMainPage,
     ],
     imports: [
         BrowserAnimationsModule,

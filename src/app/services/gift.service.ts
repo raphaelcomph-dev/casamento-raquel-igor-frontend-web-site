@@ -47,7 +47,23 @@ export class GiftService {
 
     postCheckoutMessage(dto: CheckoutMessageDto): Observable<any> {
         localStorage.setItem("checkout-message", JSON.stringify(dto));
-        return this.http.post(AppUrls.API_ENDPOINTS.GIFTS.POST_CHECKOUT_MESSAGE(), dto);
+        return this.http.post(AppUrls.API_ENDPOINTS.GIFTS.CHECKOUT_MESSAGE(), dto);
+    }
+
+    getCheckoutMessages(): Observable<any> {
+        return this.http.get(AppUrls.API_ENDPOINTS.GIFTS.CHECKOUT_MESSAGE()).pipe(
+            map((responseCheckoutMessages) => {
+                const checkoutMessages: CheckoutMessageDto[] = [];
+                for (const key in responseCheckoutMessages) {
+                    if (responseCheckoutMessages.hasOwnProperty(key)) {
+                        const newCheckoutMessage = new CheckoutMessageDto(responseCheckoutMessages[key]);
+                        newCheckoutMessage.id = key;
+                        checkoutMessages.push(newCheckoutMessage);
+                    }
+                }
+                return checkoutMessages;
+            })
+        );
     }
 
     postCheckoutWithCreditCard(dtos: GiftItemDto[]): Observable<any> {

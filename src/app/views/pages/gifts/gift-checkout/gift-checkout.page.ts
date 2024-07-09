@@ -109,14 +109,14 @@ export class GiftCheckoutPage extends BaseFormPageView implements OnInit {
     }
 
     private extractDtoFromForm(): CheckoutMessageDto {
-        return {
+        return new CheckoutMessageDto({
             name: this.inputName.getValue(),
             phone: this.inputPhone.getValue(),
             email: this.inputEmail.getValue(),
             message: this.textAreaMessage.getValue(),
             gifts: this.gifts,
             createdDateTime: new Date(),
-        };
+        });
     }
 
     private loadCartItems(): void {

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RsvpAnswerDto } from "../models/rsvp-answer.dto";
-import { Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { AppUrls } from "../app.urls";
 
 @Injectable({
@@ -11,6 +11,23 @@ export class RsvpService {
     constructor(private http: HttpClient) {}
 
     postRsvpAnswer(dto: RsvpAnswerDto): Observable<any> {
-        return this.http.post(AppUrls.API_ENDPOINTS.RSVP.POST_ANSWER(), dto);
+        return this.http.post(AppUrls.API_ENDPOINTS.RSVP.ANSWERS(), dto);
+    }
+
+    getFindAllAnswers(): Observable<RsvpAnswerDto[]> {
+        return this.http.get<RsvpAnswerDto[]>(AppUrls.API_ENDPOINTS.RSVP.ANSWERS()).pipe(
+            map((responseAnswers) => {
+                const answers: RsvpAnswerDto[] = [];
+                for (const key in responseAnswers) {
+                    if (responseAnswers.hasOwnProperty(key)) {
+                        answers.push({
+                            ...responseAnswers[key],
+                            id: key,
+                        });
+                    }
+                }
+                return answers;
+            })
+        );
     }
 }

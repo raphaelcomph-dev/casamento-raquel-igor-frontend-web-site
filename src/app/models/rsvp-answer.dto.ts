@@ -1,4 +1,5 @@
 export class RsvpAnswerDto {
+    id?: string;
     name: string;
     answer: boolean;
     answerDateTime: Date;
