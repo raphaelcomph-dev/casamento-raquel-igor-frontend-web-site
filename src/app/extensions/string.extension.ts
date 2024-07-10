@@ -2,6 +2,7 @@ declare global {
     interface String {
         changeCase(caseName: "name" | "title" | "camelCase" | "constant" | "capitalize"): string;
         parseInt(): number;
+        parseBoolean(): boolean;
         parseFloat(locale?: string): number;
         contains(str: string): boolean;
         removeNonDigits(): string;
@@ -60,6 +61,25 @@ String.prototype.parseInt = function (): number | null {
         }
     }
     return null;
+};
+
+String.prototype.parseBoolean = function (): boolean {
+    switch (this?.toLowerCase()?.trim()) {
+        case "true":
+        case "yes":
+        case "1":
+            return true;
+
+        case "false":
+        case "no":
+        case "0":
+        case null:
+        case undefined:
+            return false;
+
+        default:
+            return JSON.parse(this);
+    }
 };
 
 String.prototype.parseFloat = function (locale: string = "BRL"): number | null {

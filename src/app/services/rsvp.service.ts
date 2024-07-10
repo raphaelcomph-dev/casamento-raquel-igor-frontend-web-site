@@ -14,6 +14,14 @@ export class RsvpService {
         return this.http.post(AppUrls.API_ENDPOINTS.RSVP.ANSWERS(), dto);
     }
 
+    putRsvpAnswer(dto: RsvpAnswerDto): Observable<any> {
+        return this.http.put(AppUrls.API_ENDPOINTS.RSVP.ANSWERS(dto.id), dto);
+    }
+
+    deleteRsvpAnswer(id: string): Observable<any> {
+        return this.http.delete(AppUrls.API_ENDPOINTS.RSVP.ANSWERS(id));
+    }
+
     getFindAllAnswers(): Observable<RsvpAnswerDto[]> {
         return this.http.get<RsvpAnswerDto[]>(AppUrls.API_ENDPOINTS.RSVP.ANSWERS()).pipe(
             map((responseAnswers) => {

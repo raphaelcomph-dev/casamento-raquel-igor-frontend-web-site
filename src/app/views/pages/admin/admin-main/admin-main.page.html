@@ -103,12 +103,18 @@
                                                 >
                                                     Sim, estarei lá!
                                                 </span>
-                                                <span
-                                                    class="badge rounded-pill text-bg-danger text-white"
-                                                    *ngIf="!answer.answer"
-                                                >
-                                                    Não poderei comparecer
-                                                </span>
+                                                <div *ngIf="!answer.answer" class="">
+                                                    <span class="badge rounded-pill text-bg-danger text-white">
+                                                        Não poderei comparecer
+                                                    </span>
+                                                    <a
+                                                        role="button"
+                                                        class="text-primary small"
+                                                        (click)="onShowRsvpMessage(answer.id)"
+                                                        *ngIf="answer.message"
+                                                        >Ver mensagem</a
+                                                    >
+                                                </div>
                                             </td>
                                             <td class="text-bold-500">{{answer.guestQty}}</td>
                                             <td class="text-bold-500">{{formatDateTime(answer.answerDateTime)}}</td>
@@ -267,7 +273,7 @@
     </div>
 </div>
 
-<ng-template #modalCheckoutMessage let-modal>
+<ng-template #modalShowMessage let-modal>
     <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
@@ -275,10 +281,10 @@
     <div class="modal-body text-center p-md-4">
         <figure class="text-center">
             <blockquote class="blockquote">
-                <p>&#8220;{{selectedCheckoutMessage.message}}&#8221;</p>
+                <p>&#8220;{{selectedMessage.message}}&#8221;</p>
             </blockquote>
             <figcaption class="blockquote-footer">
-                <cite class="small">{{selectedCheckoutMessage.name}}</cite>
+                <cite class="small">{{selectedMessage.name}}</cite>
             </figcaption>
         </figure>
     </div>
@@ -323,47 +329,8 @@
 </ng-template>
 
 <ng-template #modalEditRsvp let-modal>
-    <div class="modal-header">
-        <span class="modal-title fs-5" id="modalTitleId">Editar confirmação de presença</span>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-
-    <div class="modal-body text-center p-md-4">
-        <form>
-            <div class="mb-4">
-                <app-input-text
-                    #inputName
-                    placeholder="Nome ou nome da família"
-                    [required]="true"
-                    [initialValue]="selectedRsvpAnswer.name"
-                ></app-input-text>
-            </div>
-            <div class="mb-4">
-                <app-input-radiogroup
-                    #radioRsvpAnswer
-                    [options]="rsvpAnswerInputOptions"
-                    [required]="true"
-                    [initialCheckedOption]="selectedRsvpAnswer.answer.toString()"
-                ></app-input-radiogroup>
-            </div>
-            <div class="mb-4">
-                <app-select-single-choice
-                    #selectGuestQty
-                    placeholder="Quantas pessoas irão com você?"
-                    [options]="rsvpQtyGuestSelectOptions"
-                    [required]="true"
-                    [initialSelectedValue]="selectedRsvpAnswer.guestQty.toString()"
-                >
-                </app-select-single-choice>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-primary" (click)="modal.dismiss('Cross click')">
-            <span>Cancelar</span>
-        </button>
-        <button type="submit" class="btn btn-primary text-white" (click)="onSaveRsvpAnswer()">
-            <span>Salvar resposta</span>
-        </button>
-    </div>
+    <app-form-edit-rsvp
+        [originalRsvpAnswer]="selectedRsvpAnswer"
+        (onFinish)="onFinishEditRsvp($event)"
+    ></app-form-edit-rsvp>
 </ng-template>

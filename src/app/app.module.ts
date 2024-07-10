@@ -43,6 +43,7 @@ import { GiftHeroComponent } from "./views/components/molecules/gift-hero/gift-h
 import { CheckoutRedirectPage } from "./views/pages/checkout-redirect/checkout-redirect.page";
 import { AdminLoginPage } from "./views/pages/admin/admin-login/admin-login.page";
 import { AdminMainPage } from "./views/pages/admin/admin-main/admin-main.page";
+import { FormEditRsvpComponent } from './views/components/molecules/form-edit-rsvp/form-edit-rsvp.component';
 
 dayjs.extend(duration);
 dayjs.locale("pt-br");
@@ -74,6 +75,7 @@ registerLocaleData(localePt);
         CheckoutRedirectPage,
         AdminLoginPage,
         AdminMainPage,
+        FormEditRsvpComponent,
     ],
     imports: [
         BrowserAnimationsModule,

@@ -1,8 +1,5 @@
-<div class="preview-panel-wrap">
-    <div class="preview-panel glass"></div>
-</div>
-<div class="vh-100 d-flex align-items-center bg-body-secondary">
-    <div class="align-self-center mx-auto py-8 px-sm-10 px-3 shadow-lg bg-white" style="z-index: 100">
+<div class="vh-100 d-flex align-items-center bg-color-s3">
+    <div class="align-self-center mx-auto py-8 px-sm-10 px-3 shadow-lg bg-white" style="z-index: 100; max-width: 540px">
         <div class="mx-auto p-sm-5 py-5">
             <h1 class="mb-5 text-center">
                 <a class="navbar-brand me-0 text-center" href="index.html">
@@ -21,10 +18,7 @@
             </div>
 
             <div class="text-center mb-2">
-                <p>
-                    Você está sendo redirecionado para efetuar <br />
-                    o pagamento numa página do Mercado Pago
-                </p>
+                <p>Você está sendo redirecionado para o Mercado Pago para efetuar o pagamento.</p>
                 <p *ngIf="checkoutUrl">
                     Se você não for redirecionado em 5 segundos, <br />
                     por gentileza <a role="button" [href]="checkoutUrl">clique aqui</a>

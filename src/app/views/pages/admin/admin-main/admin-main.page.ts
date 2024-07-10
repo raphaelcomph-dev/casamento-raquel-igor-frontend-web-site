@@ -1,44 +1,47 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { BasePageView } from "../../base-page.view";
-import { GiftService } from "../../../../services/gift.service";
-import { RsvpService } from "../../../../services/rsvp.service";
-import { RsvpAnswerDto } from "../../../../models/rsvp-answer.dto";
-import { CheckoutMessageDto } from "../../../../models/checkout-message.dto";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { InputOption } from "../../../components/atoms/input-radiogroup/input-radiogroup.component";
-import { SelectOption } from "../../../components/atoms/select-single-choice/select-single-choice.component";
+import { CheckoutMessageDto } from "../../../../models/checkout-message.dto";
+import { RsvpAnswerDto } from "../../../../models/rsvp-answer.dto";
+import { GiftService } from "../../../../services/gift.service";
+import { NotificationService } from "../../../../services/notification.service";
+import { RsvpService } from "../../../../services/rsvp.service";
+import { FormStateEnum } from "../../../base-form.view";
+import {
+    InputOption,
+    InputRadiogroupComponent,
+} from "../../../components/atoms/input-radiogroup/input-radiogroup.component";
+import {
+    SelectOption,
+    SelectSingleChoiceComponent,
+} from "../../../components/atoms/select-single-choice/select-single-choice.component";
+import { BaseFormPageView } from "../../base-form-page.view";
+import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
 
 @Component({
     selector: "app-admin-main",
     templateUrl: "./admin-main.page.html",
     styles: ``,
 })
-export class AdminMainPage extends BasePageView implements OnInit {
-    @ViewChild("modalCheckoutMessage") modalCheckoutMessage;
+export class AdminMainPage extends BaseFormPageView implements OnInit {
+    @ViewChild("modalShowMessage") modalShowMessage;
     @ViewChild("modalEditRsvp") modalEditRsvp;
     @ViewChild("modalDeleteRsvp") modalDeleteRsvp;
+
     active = 1;
     rsvpAnswers: RsvpAnswerDto[] = [];
     checkoutMessages: CheckoutMessageDto[] = [];
-    selectedCheckoutMessage: CheckoutMessageDto;
+    selectedMessage: {
+        name: string;
+        message?: string;
+    };
     selectedRsvpAnswer: RsvpAnswerDto;
-    rsvpAnswerInputOptions: InputOption[] = [
-        { value: "true", label: "Sim, eu estarei lá!" },
-        { value: "false", label: "Desculpe, não poderei comparecer" },
-    ];
-    rsvpQtyGuestSelectOptions: SelectOption[] = [
-        { value: "1", text: "01 (incluindo a mim)" },
-        { value: "2", text: "02 (incluindo a mim)" },
-        { value: "3", text: "03 (incluindo a mim)" },
-        { value: "4", text: "04 (incluindo a mim)" },
-        { value: "5", text: "05 (incluindo a mim)" },
-        { value: "6", text: "06 (incluindo a mim)" },
-    ];
 
     constructor(
         private readonly giftService: GiftService,
         private readonly rsvpService: RsvpService,
-        private readonly modalService: NgbModal
+        private readonly modalService: NgbModal,
+        private readonly notifier: NotificationService,
+        private readonly cdr: ChangeDetectorRef
     ) {
         super();
     }
@@ -58,31 +61,36 @@ export class AdminMainPage extends BasePageView implements OnInit {
     }
 
     ngOnInit(): void {
-        this.rsvpService.getFindAllAnswers().subscribe((response) => {
-            this.rsvpAnswers = response;
-        });
+        this.loadAllRsvpAnswers();
         this.giftService.getCheckoutMessages().subscribe((response) => {
             this.checkoutMessages = response;
         });
     }
 
     onShowModalCheckoutMessage(checkoutMessageId): void {
-        this.selectedCheckoutMessage = this.checkoutMessages.find(
+        this.selectedMessage = this.checkoutMessages.find(
             (checkoutMessage) => checkoutMessage.id === checkoutMessageId
         );
-        this.modalService.open(this.modalCheckoutMessage, {
+        this.modalService.open(this.modalShowMessage, {
+            centered: true,
+        });
+    }
+
+    onShowRsvpMessage(rsvpAnswerId: string): void {
+        this.selectedMessage = this.rsvpAnswers.find((rsvpAnswer) => rsvpAnswer.id === rsvpAnswerId);
+        this.modalService.open(this.modalShowMessage, {
             centered: true,
         });
     }
 
     onShowEditModalRsvpAnswer(rsvpAnswerId: string): void {
-        this.selectedRsvpAnswer = this.rsvpAnswers.find((rsvpAnswer) => rsvpAnswer.id === rsvpAnswerId);
+        this.selectedRsvpAnswer = JSON.parse(
+            JSON.stringify(this.rsvpAnswers.find((rsvpAnswer) => rsvpAnswer.id === rsvpAnswerId))
+        );
         this.modalService.open(this.modalEditRsvp, {
             centered: true,
         });
     }
-
-    onSaveRsvpAnswer(): void {}
 
     onShowDeleteModalRsvpAnswer(rsvpAnswerId: string): void {
         this.selectedRsvpAnswer = this.rsvpAnswers.find((rsvpAnswer) => rsvpAnswer.id === rsvpAnswerId);
@@ -91,5 +99,29 @@ export class AdminMainPage extends BasePageView implements OnInit {
         });
     }
 
-    onDeleteRsvpAnswer(): void {}
+    onDeleteRsvpAnswer(): void {
+        this.modalService.dismissAll();
+        this.rsvpService.deleteRsvpAnswer(this.selectedRsvpAnswer.id).subscribe({
+            next: () => {
+                this.notifier.showSuccess("Confirmação de presença excluída com sucesso!");
+                this.loadAllRsvpAnswers();
+            },
+            error: (e) => {
+                throw e;
+            },
+        });
+    }
+
+    onFinishEditRsvp($event): void {
+        if ($event) {
+            this.loadAllRsvpAnswers();
+        }
+        this.modalService.dismissAll();
+    }
+
+    private loadAllRsvpAnswers() {
+        this.rsvpService.getFindAllAnswers().subscribe((response) => {
+            this.rsvpAnswers = response;
+        });
+    }
 }

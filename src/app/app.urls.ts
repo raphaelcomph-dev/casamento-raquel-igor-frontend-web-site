@@ -53,9 +53,9 @@ export class AppUrls {
             },
         },
         RSVP: {
-            ANSWERS: (): string => {
+            ANSWERS: (id?: string): string => {
                 if (environment.production) {
-                    return `${environment.apiUrl.firebaseDb}/rsvp.json`;
+                    return `${environment.apiUrl.firebaseDb}/rsvp${id ? `/${id}` : ""}.json`;
                 }
                 return `http://localhost:3000/rsvp`;
             },
