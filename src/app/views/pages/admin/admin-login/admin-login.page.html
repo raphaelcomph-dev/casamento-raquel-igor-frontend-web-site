@@ -17,25 +17,47 @@
                 </div>
 
                 <div class="text-start mx-auto position-relative bg-white z-1">
-                    <form class="">
+                    <form class="" (ngSubmit)="onSubmitLogin()">
                         <div class="mb-3">
                             <app-input-text
-                                #inputName
+                                #inputPassword
                                 placeholder="Informe sua senha"
                                 fieldName="Senha"
                                 type="password"
                                 [required]="true"
+                                [readOnly]="!isFormInEditableState(formState)"
                             ></app-input-text>
                         </div>
 
                         <div class="d-grid gap-2 mx-auto">
-                            <button class="btn btn-primary text-white" type="submit">Prosseguir</button>
+                            <button
+                                class="btn btn-primary text-white"
+                                type="submit"
+                                [disabled]="!isFormInEditableState(formState)"
+                            >
+                                <span *ngIf="isFormInLoadingState(formState)">
+                                    <span class="spinner-border spinner-border-sm me-3" aria-hidden="true"></span>
+                                    <span>Processando...</span>
+                                </span>
+                                <span *ngIf="isFormInEditableState(formState)">
+                                    <span>Prosseguir</span>
+                                </span>
+                                <span *ngIf="isFormInSuccessState(formState)">
+                                    <span>Login realizado!</span>
+                                </span>
+                            </button>
                         </div>
 
                         <div class="my-4 text-center">
                             <div class="form-check d-inline-block">
                                 <div class="checkbox small">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input" />
+                                    <input
+                                        type="checkbox"
+                                        id="checkbox1"
+                                        class="form-check-input"
+                                        [(ngModel)]="remeberMe"
+                                        [ngModelOptions]="{ standalone: true }"
+                                    />
                                     <label for="checkbox1">Lembrar de mim</label>
                                     <i
                                         class="fa-solid fa-circle-info ms-2"

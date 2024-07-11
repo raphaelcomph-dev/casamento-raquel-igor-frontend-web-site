@@ -1,21 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CheckoutMessageDto } from "../../../../models/checkout-message.dto";
 import { RsvpAnswerDto } from "../../../../models/rsvp-answer.dto";
+import { AuthService } from "../../../../services/auth.service";
 import { GiftService } from "../../../../services/gift.service";
 import { NotificationService } from "../../../../services/notification.service";
 import { RsvpService } from "../../../../services/rsvp.service";
-import { FormStateEnum } from "../../../base-form.view";
-import {
-    InputOption,
-    InputRadiogroupComponent,
-} from "../../../components/atoms/input-radiogroup/input-radiogroup.component";
-import {
-    SelectOption,
-    SelectSingleChoiceComponent,
-} from "../../../components/atoms/select-single-choice/select-single-choice.component";
 import { BaseFormPageView } from "../../base-form-page.view";
-import { InputTextComponent } from "../../../components/atoms/input-text/input-text.component";
 
 @Component({
     selector: "app-admin-main",
@@ -41,7 +33,9 @@ export class AdminMainPage extends BaseFormPageView implements OnInit {
         private readonly rsvpService: RsvpService,
         private readonly modalService: NgbModal,
         private readonly notifier: NotificationService,
-        private readonly cdr: ChangeDetectorRef
+        private readonly cdr: ChangeDetectorRef,
+        private readonly authService: AuthService,
+        private readonly router: Router
     ) {
         super();
     }
@@ -65,6 +59,8 @@ export class AdminMainPage extends BaseFormPageView implements OnInit {
         this.giftService.getCheckoutMessages().subscribe((response) => {
             this.checkoutMessages = response;
         });
+
+        this.redirectToAdminLoginPageIfNotLoggedIn();
     }
 
     onShowModalCheckoutMessage(checkoutMessageId): void {
@@ -119,9 +115,19 @@ export class AdminMainPage extends BaseFormPageView implements OnInit {
         this.modalService.dismissAll();
     }
 
+    onLogout(): void {
+        this.authService.logout();
+    }
+
     private loadAllRsvpAnswers() {
         this.rsvpService.getFindAllAnswers().subscribe((response) => {
             this.rsvpAnswers = response;
         });
+    }
+
+    private redirectToAdminLoginPageIfNotLoggedIn(): void {
+        if (!this.authService.isLoggedIn) {
+            this.router.navigate([this.URLS.PATHS.ADMIN.LOGIN()]);
+        }
     }
 }

@@ -60,5 +60,13 @@ export class AppUrls {
                 return `http://localhost:3000/rsvp`;
             },
         },
+        AUTH: {
+            LOGIN: (): string => {
+                return `${environment.apiUrl.backend}/auth/login`;
+            },
+            TOKEN_VALIDATE: (): string => {
+                return `${environment.apiUrl.backend}/auth/token/validate`;
+            },
+        },
     };
 }
