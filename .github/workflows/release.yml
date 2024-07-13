@@ -44,10 +44,13 @@ jobs:
               run: |
                   curl -sL https://firebase.tools | bash
 
-            - name: Install and Build
+            - name: Install
               run: |
                   npm install
-                  ng build --configuration production
+
+            - name: Build
+              run: |
+                  npm run build:prod
 
             - name: Deploy to Firebase
               env:
