@@ -6,9 +6,11 @@
 
 .auth-wrapper {
     min-width: 512px;
-    // max-width: 512px;
     overflow-y: scroll;
     @media (max-width: 576px) {
+        min-width: 100%;
+        padding-left: 8px;
+        padding-right: 8px;
         height: 100vh;
     }
 }

@@ -1,15 +1,25 @@
 <div class="wrapper bg-color-s3 pb-5 vh-100 overflow-y-scroll">
-    <div class="header bg-white">
+    <div class="header bg-white mb-4">
         <div class="container">
-            <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-4">
-                <div class="col-3 mb-2 mb-md-0">
+            <header class="d-flex flex-wrap align-items-center justify-content-between py-3 mb-1">
+                <div class="col-lg-4 col-md-4 col-2">
+                    <a role="button" [routerLink]="URLS.PATHS.ROOT.ABSOLUTE_PATH()">
+                        <i class="fa-solid fa-home fa-lg me-2"></i>
+                        <span class="d-none d-md-inline">Página principal</span>
+                    </a>
+                </div>
+                <div class="col text-center">
                     <div class="navbar-header">
                         <a class="navbar-brand" role="button">Raquel & Igor</a>
                     </div>
                 </div>
-
-                <div class="col-3 text-end">
-                    <button type="button" class="btn btn-outline-primary me-2" (click)="onLogout()">Sair</button>
+                <div class="col-lg-4 col-md-4 col-2">
+                    <div class="float-end">
+                        <a class="text-primary" role="button" (click)="onLogout()">
+                            <i class="fa-solid fa-right-from-bracket fa-lg me-2"></i>
+                            <span class="d-none d-md-inline">Sair</span>
+                        </a>
+                    </div>
                 </div>
             </header>
         </div>
@@ -163,7 +173,24 @@
                                             <td class="text-bold-500">{{i+1}}.</td>
                                             <td class="text-bold-500">{{checkoutMessage.name}}</td>
                                             <td class="text-bold-500">
-                                                <span class="text-nowrap">{{checkoutMessage.phone}}</span>/
+                                                <div>
+                                                    <span class="text-nowrap">{{checkoutMessage.phone}}</span>
+                                                    <span class="text-nowrap d-block text-primary">
+                                                        <a
+                                                            href="https://api.whatsapp.com/send?phone=55{{checkoutMessage.phone}}&text=Ol%C3%A1%20{{checkoutMessage.name}}%20..."
+                                                            role="button"
+                                                        >
+                                                            <i class="fa-brands fa-whatsapp"></i>
+                                                            Conversar
+                                                        </a>
+                                                        <span class="mx-2">&bull;</span>
+                                                        <!-- <span class="mx-2">|</span> -->
+                                                        <a href="tel:{{checkoutMessage.phone}}" role="button">
+                                                            <i class="fa-solid fa-phone"></i>
+                                                            Ligar
+                                                        </a>
+                                                    </span>
+                                                </div>
                                                 <span class="text-nowrap">{{checkoutMessage.email}}</span>
                                             </td>
                                             <td class="text-bold-500">{{checkoutMessage.giftsNames()}}</td>
