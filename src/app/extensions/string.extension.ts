@@ -1,10 +1,10 @@
 declare global {
     interface String {
         changeCase(caseName: "name" | "title" | "camelCase" | "constant" | "capitalize"): string;
+        contains(str: string): boolean;
         parseInt(): number;
         parseBoolean(): boolean;
         parseFloat(locale?: string): number;
-        contains(str: string): boolean;
         removeNonDigits(): string;
         removeFormat(): string;
         substringUntilLast(str: string): string;
